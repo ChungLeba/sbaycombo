@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    Sbay combo | Sales Management
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+  <script>
+
+    tailwind.config = {
+      /* theme: {
+        extend: {
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      } */
+      plugins: [require("daisyui")],
+
+      // daisyUI config (optional - here are the default values)
+      daisyui: {
+        themes: false, // true: all themes | false: only light + dark | array: specific themes like this ["light", "dark", "cupcake"]
+        darkTheme: "dark", // name of one of the included themes for dark mode
+        base: true, // applies background color and foreground color for root element by default
+        styled: true, // include daisyUI colors and design decisions for all components
+        utils: true, // adds responsive and modifier utility classes
+        rtl: false, // rotate style direction from left-to-right to right-to-left. You also need to add dir="rtl" to your html tag and install `tailwindcss-flip` plugin for Tailwind CSS.
+        prefix: "", // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
+        logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
+      },
+    }
+  </script>
+</head>
+
+<body>
+  <header class="bg-white">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <div class="flex lg:flex-1">
+        <a href="#" class="-m-1.5 p-1.5">
+          <span class="sr-only">Sbay Combo</span>
+          <img class="h-8 w-auto" src="images/sbay-logo.png" alt="">
+        </a>
+      </div>
+
+      <div class="hidden lg:flex lg:gap-x-12">
+        <div class="relative">
+          <button type="button" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 mt-2"
+            aria-expanded="false">
+            Tổng quan
+
+          </button>
+        </div>
+
+        <a href="#" class="text-sm font-semibold leading-6 text-gray-900 mt-2">Chờ xử lý (44)</a>
+        <a href="#" class="text-sm font-semibold leading-6 text-gray-900 mt-2">Đã hoàn thành (35)</a>
+        <a href="#" class="text-sm font-semibold leading-6 text-gray-900 mt-2">Hủy (6)</a>
+        <div class="flex items-center gap-x-6">
+          <img class="h-12 w-12 rounded-full"
+            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            alt="">
+          <div>
+            <h3 class="text-base font-semibold leading-7 tracking-tight text-gray-900 flex flex-row">Hoài An <i
+                data-feather="chevron-down" class="ml-2 mt-1"></i></h3>
+            <p class="text-sm font-semibold leading-6 text-indigo-600">P.Kinh doanh</p>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+  </header>
+
+  <div class="bg-white pt-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <dl class="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">
+        <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+          <dt class="flex flex-row text-base leading-7 text-gray-600">Đơn hàng chờ xử lý
+          </dt>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">44</dd>
+        </div>
+        <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+          <dt class="text-base leading-7 text-gray-600">Tiền hàng chờ xử lý</dt>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">119,000,000 </dd>
+        </div>
+        <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+          <dt class="text-base leading-7 text-gray-600"> Doanh thu đã ghi nhận</dt>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">299,000,000 </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+  <div class="relative isolate overflow-hidden bg-white px-6 sm:py-32 lg:overflow-visible lg:px-0 hidden lg:block">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <h2 class="text-3xl py-5 font-bold">Các combo đang áp dụng</h2>
+      <div class="flex flex-row justify-end">
+        <button class="bg-red-500 text-2xl mb-2 p-2 rounded-sm text-white">+ Thêm combo</button>
+
+      </div>
+      <div class="grid grid-row-4 gap-4">
+        <% for( let index=0; index < 4; index++ ) { %>
+          <div
+            class="grid grid-cols-12 p-5 bg-slate-100 rounded-md w-full pointer-events-auto w-[25.625rem] rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-700 shadow-xl shadow-black/5 ring-1 ring-slate-700/10">
+            <div class="col-span-2 mt-3">
+              <img src="./images/sbay.jpg" class="rounded-lg mx-auto w-40" alt="">
+            </div>
+            <div class="col-span-10">
+              <div class="grid grid-cols-2 mt-5">
+                <p class="text-center flex flex-row"><i data-feather="map-pin" class="mr-2"></i>Đà Nẵng</p>
+                
+                <a href="#" class="rounded-lg text-red-700 text-xl text-end flex flex-row justify-end"><i
+                    data-feather="edit" class="mr-2 mt-2"></i>Cập nhật combo</a>
+              </div>
+              <h3 class="text-2xl m2-3 font-bold">Combo 2N1Đ Sona Resort Ninh Bình Trọn Vé Xe Khứ Hồi</h3>
+              <p class="mb-2">Trọn vé xe khứ hồi
+                , Bao gồm giá phòng
+                , Buffet sáng hoặc chọn món
+                , Miễn phí sử dụng Internet Wifi.
+                , Miễn phí 02 chai nước suối và 02 túi trà trong phòng mỗi ngày.
+                , Miễn phí sử dụng hồ bơi
+                , Xe đạp miễn phí
+                , Nhiều điểm check in mới lạ : rose house, xích đu , góc sắc màu …</p>
+              <p class="flex flex-row mb-2"><i data-feather="code" class="mr-2"></i>Mã Combo: HN52</p>
+              <p class="flex flex-row mb-2"><i data-feather="clock" class="mr-2"></i>Thời gian: 2 ngày 1 đêm</p>
+              <p class="flex flex-row mb-2"><i data-feather="shopping-bag" class="mr-2"></i>150 đã đặt</p>
+              <p class="flex flex-row mb-2"><i data-feather="dollar-sign" class="mr-2"></i>820.000đ/khách</p>
+            </div>
+
+          </div>
+          <% } %>
+
+
+      </div>
+    </div>
+  </div>
+  <script>
+    feather.replace()
+  </script>
+</body>
+
+</html>
