@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html data-theme="cupcake">
 
-
 <head>
   <title>
-    Sbay combo | Sales Management
+    Tổng quan | Quản lý - Sales Management
   </title>
   <meta name="author" content="Chung Le Ba">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
   <script>
@@ -44,78 +40,63 @@
 </head>
 
 <body>
-  <header class=" bg-red-700 ">
-    <nav class="mx-auto flex max-w-7xl items-center justify-between p-2 lg:px-8 " aria-label="Global">
-      <div class="flex lg:flex-1">
-        <a href="#" class="-m-1.5 p-1.5">
-          <span class="sr-only">Sbay Combo</span>
-          <img class="h-8 w-auto" src="images/sbay-logo.png" alt="">
-        </a>
-      </div>
-
-      <div class="hidden lg:flex lg:gap-x-12">
-        <div class="relative">
-          <button type="button" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 mt-2 text-white"
-            aria-expanded="false">
-            Tổng quan
-          </button>
-        </div>
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900 mt-2 text-white">Combo (44)</a>
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900 mt-2 text-white">Hot deal (35)</a>
-        <!-- <a href="#" class="text-sm font-semibold leading-6 text-gray-900 mt-2">Chờ xử lý (44)</a>
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900 mt-2">Đã hoàn thành (35)</a>
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900 mt-2">Hủy (6)</a> -->
-        <div class="flex items-center gap-x-6">
-          <img class="h-12 w-12 rounded-full"
-            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            alt="">
-          <div>
-            <h3 class="text-base font-semibold leading-7 tracking-tight text-gray-900 flex flex-row text-white">Hoài An <i
-                data-feather="chevron-down" class="ml-2 mt-1"></i></h3>
-            <p class="text-sm font-semibold leading-6 text-indigo-600 text-white">P.Kinh doanh</p>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-  </header>
+  <%- include('m-topbar.ejs'); -%>
 
   <div class="bg-white hero min-h-screen animate__animated animate__pulse">
     <div class="mx-auto max-w-7xl px-6 lg:px-8 mt-24">
       <dl class="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">
-        
+
         <div class="mx-auto">
-          <div class=" flex max-w-xs flex-col gap-y-2  bg-slate-100 rounded-md w-full pointer-events-auto w-[25.625rem] rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-700 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 p-5">
+          <div
+            class=" flex max-w-xs flex-col gap-y-2  bg-slate-100 rounded-md w-full pointer-events-auto w-[25.625rem] rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-700 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 p-5">
             <dt class="text-base leading-7 text-gray-600">Đơn combo chờ xử lý</dt>
-            <dd class="order-first text-xl font-semibold tracking-tight text-gray-900 sm:text-5xl text-red-600">456 </dd>
+            <dd class="order-first text-xl font-semibold tracking-tight text-gray-900 sm:text-5xl text-red-600">456
+            </dd>
           </div>
-          <div class=" flex max-w-xs flex-col gap-y-2 mt-2 bg-slate-100 rounded-md w-full pointer-events-auto w-[25.625rem] rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-700 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 p-5">
+          <div
+            class=" flex max-w-xs flex-col gap-y-2 mt-2 bg-slate-100 rounded-md w-full pointer-events-auto w-[25.625rem] rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-700 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 p-5">
             <dt class="text-base leading-7 text-gray-600">Đơn hotdeal chờ xử lý</dt>
-            <dd class="order-first text-xl font-semibold tracking-tight text-gray-900 sm:text-5xl text-orange-600">789 </dd>
+            <dd class="order-first text-xl font-semibold tracking-tight text-gray-900 sm:text-5xl text-orange-600">789
+            </dd>
           </div>
         </div>
         <div class="mx-auto flex max-w-xs flex-col gap-y-4 my-auto">
-          <div class=" bg-slate-100 rounded-md w-full pointer-events-auto w-[25.625rem] rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-700 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 p-5">
-            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl text-red-600">123,456,789</dd>
-            
+          <div
+            class=" bg-slate-100 rounded-md w-full pointer-events-auto w-[25.625rem] rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-700 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 p-5">
+            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl text-red-600">
+              123,456,789</dd>
+
             <dt class="flex flex-row text-base leading-7 text-gray-600 justify-center mt-2 ">Tiền hàng chờ xử lý
             </dt>
           </div>
 
         </div>
-        <div class="mx-auto flex max-w-xs flex-col gap-y-4 my-auto  bg-slate-100 rounded-md w-full pointer-events-auto w-[25.625rem] rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-700 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 p-5">
+        <div
+          class="mx-auto flex max-w-xs flex-col gap-y-4 my-auto  bg-slate-100 rounded-md w-full pointer-events-auto w-[25.625rem] rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-700 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 p-5">
           <dt class="text-base leading-7 text-gray-600"> Doanh thu đã ghi nhận</dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl text-green-600">299,000,000 </dd>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl text-green-600">
+            299,000,000 </dd>
         </div>
 
       </dl>
-      <div class=" text-end px-10">
+      <div class=" text-end px-10 mb-5">
         <p>Đơn vị tính: vnđ</p>
       </div>
+      
+      <% for( let index=0; index < 5; index++ ) { %>
 
+        <div class="flex flex-row justify-end text-end px-10 mb-2">
+          <p class="mr-1 italic ">3 phút trước - </p>
+          <p class="font-bold mr-1 text-violet-600">Sang </p>
+          <p class=" mr-1">đang xử lý </p>
+          <p class="text-red-600 mr-1">Combo </p>
+          <p class=" mr-1">của khách hàng </p>
+          <p class=" font-semibold">Lê Hoàng Nam</p>
+        </div>
+        <% } %>
     </div>
   </div>
-  <div class="relative isolate overflow-hidden bg-white px-6 sm:py-32 lg:overflow-visible lg:px-0 hidden lg:block">
+  <div class="bg-white px-6 lg:overflow-visible lg:px-0 hidden lg:block">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <h2 class="text-3xl py-5 font-bold">Các combo đang áp dụng</h2>
       <div class="flex flex-row justify-end">

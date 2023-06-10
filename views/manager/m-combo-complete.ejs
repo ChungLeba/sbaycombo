@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html data-theme="cupcake">
+
+<head>
+  <title>
+    Combo hoàn thành | Quản lý - Sales Management
+  </title>
+  <meta name="author" content="Chung Le Ba">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+  <script>
+
+    tailwind.config = {
+      /* theme: {
+        extend: {
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      } */
+      plugins: [require("daisyui")],
+
+      // daisyUI config (optional - here are the default values)
+      daisyui: {
+        themes: false, // true: all themes | false: only light + dark | array: specific themes like this ["light", "dark", "cupcake"]
+        darkTheme: "dark", // name of one of the included themes for dark mode
+        base: true, // applies background color and foreground color for root element by default
+        styled: true, // include daisyUI colors and design decisions for all components
+        utils: true, // adds responsive and modifier utility classes
+        rtl: false, // rotate style direction from left-to-right to right-to-left. You also need to add dir="rtl" to your html tag and install `tailwindcss-flip` plugin for Tailwind CSS.
+        prefix: "", // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
+        logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
+      },
+    }
+  </script>
+</head>
+
+<body>
+  <%- include('m-topbar.ejs'); -%>
+
+    <div class="bg-white px-6">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <!--Tabs navigation-->
+        <div class="flex flex-col">
+
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <h1 class=" font-bold mt-24 text-3xl">Quản lý Combo</h1>
+
+            <%- include('m-combo-status.ejs'); -%>
+
+            <h2 class="text-2xl mt-5 text-center text-blue-600 font-bold">Các Combo hoàn thành</h2>
+            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+              <div class="overflow-hidden">
+                <table class="min-w-full text-left text-sm font-light">
+                  <thead class="border-b font-medium dark:border-neutral-500">
+                    <tr>
+                      <th scope="col" class="px-6 py-4">#</th>
+                      <th scope="col" class="px-6 py-4">Thời gian đặt</th>
+                      <th scope="col" class="px-6 py-4">Khách hàng</th>
+                      <th scope="col" class="px-6 py-4">Mã Combo</th>
+                      <th scope="col" class="px-6 py-4">Tên Combo</th>
+                      <th scope="col" class="px-6 py-4">Trạng thái</th>
+                      <th scope="col" class="px-6 py-4">Nhân viên xử lý</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for( let index=0; index < 100; index++ ) { %>
+                      <tr
+                        class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                        <td class="whitespace-nowrap px-6 py-4 font-medium">
+                          <%= index +1 %>
+                        </td>
+                        <td class="whitespace-nowrap px-6 py-4">08:08, ngày 12/12/2022</td>
+                        <td class="whitespace-nowrap px-6 py-4 font-bold">Lê Hoài Bảo</td>
+                        <td class="whitespace-nowrap px-6 py-4">#HN52</td>
+                        <td class="whitespace-nowrap px-6 py-4 font-bold">Combo 2N1Đ Sona Resort Ninh Bình Trọn Vé Xe
+                          Khứ Hồi</td>
+                        <td class="whitespace-nowrap px-6 py-4 text-blue-600">Đã hoàn thành</td>
+                        <td class="whitespace-nowrap px-6 py-4 text-violet-600">Nguyễn Hằng</td>
+                        
+                      </tr>
+                      <% } %>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      feather.replace()
+    </script>
+</body>
+
+</html>
