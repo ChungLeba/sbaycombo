@@ -6,6 +6,10 @@ var user_Model = require('../models/user.model')
 router.get('/', function(req, res, next) {
   res.render('index');
 });
+/* GET home page. */
+router.get('/test', function(req, res, next) {
+  res.render('test');
+});
 router.get('/dang-ky', function(req, res, next) {
   res.render('sign_in');
 });
@@ -14,6 +18,12 @@ router.get('/quen-mat-khau', function(req, res, next) {
 });
 router.get('/thong-bao-tai-khoan', function(req, res, next) {
   res.render('employee_noiti');
+});
+router.get('/thay-doi-thong-tin', function(req, res, next) {
+  res.render('profile-edit');
+});
+router.get('/logout', function(req, res, next) {
+  res.redirect('/')
 });
 /* GET home tong quan. */
 router.get('/tong-quan', function(req, res, next) {
@@ -37,4 +47,5 @@ router.get('/tong-quan', function(req, res, next) {
 }) */
   
 });
+
 module.exports = router;

@@ -3,7 +3,7 @@
 
 <head>
   <title>
-    Combo hoàn thành | Quản lý - Sales Management
+    Combo hủy | Nhân viên - Sales Management
   </title>
   <meta name="author" content="Chung Le Ba">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
 </head>
 
 <body>
-  <%- include('m-com-topbar.ejs'); -%>
+  <%- include('e-com-topbar.ejs'); -%>
 
     <div class=" px-2">
       <div class="mx-auto max-w-7xl px-2 lg:px-8">
@@ -27,13 +27,13 @@
             <div class="text-sm breadcrumbs py-2 sm:px-2 lg:px-8 mt-5">
               <ul>
                 <li><a href="/manager">Combo</a></li>
-                <li>Combo hoàn thành</li>
+                <li>Combo hủy</li>
               </ul>
             </div>
 
-            <%- include('m-com-combo-status.ejs'); -%>
+            <%- include('e-com-combo-status.ejs'); -%>
 
-            <h1 class="text-2xl mt-5 text-center text-blue-600 font-bold">Các Combo hoàn thành</h1>
+            <h1 class="text-2xl mt-5 text-center text-slate-600 font-bold">Các Combo hủy</h1>
             <div class="inline-block min-w-full py-2 sm:px-2 lg:px-8">
               <div class="overflow-hidden">
                 <table class="min-w-full text-left text-sm font-light">
@@ -44,7 +44,7 @@
                       <th scope="col" class="px-2 py-4">Khách hàng</th>
                       <th scope="col" class="px-2 py-4">Mã Combo</th>
                       <th scope="col" class="px-2 py-4">Tên Combo</th>
-                      <th scope="col" class="px-2 py-4">Thời gian hoàn thành</th>
+                      <th scope="col" class="px-2 py-4">Thời gian hủy</th>
                       <th scope="col" class="px-2 py-4">Nhân viên xử lý</th>
 
                     </tr>
@@ -61,7 +61,7 @@
                         <td class="whitespace-nowrap px-2 py-4">#HN52</td>
                         <td class="whitespace-nowrap px-2 py-4 font-bold">Combo 2N1Đ Sona Resort Ninh Bình Trọn Vé Xe
                           Khứ Hồi</td>
-                        <td class="whitespace-nowrap px-2 py-4 text-blue-600">09:08 am, ngày 12/12/2022</td>
+                        <td class="whitespace-nowrap px-2 py-4 text-slate-600">09:08 am, ngày 12/12/2022</td>
                         <td class="whitespace-nowrap px-2 py-4 text-violet-600">Nguyễn Hằng</td>
                         
                       </tr>
@@ -77,8 +77,7 @@
       </div>
     </div>
     
-    <!-- add button -->
-    <%- include('m-com-add-button.ejs'); -%>
+
     <script>
       feather.replace()
     </script>

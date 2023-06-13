@@ -3,7 +3,7 @@
 
 <head>
   <title>
-    Tổng quan | Quản lý - Sales Management
+    Tổng quan | Nhân viên - Sales Management
   </title>
   <meta name="author" content="Chung Le Ba">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <%- include('m-com-topbar.ejs'); -%>
+  <%- include('e-com-topbar.ejs'); -%>
     <h1 class="text-2xl mt-5 text-center text-red-600 font-bold">Tổng quan</h1>
 
 
@@ -25,7 +25,7 @@
           <div class="flex flex-wrap animate__animated animate__pulse">
 
             
-            <a href="/manager/quan-ly-combo" class="w-full lg:w-6/12 xl:w-3/12 px-4">
+            <a href="/employee/quan-ly-combo" class="w-full lg:w-6/12 xl:w-3/12 px-4">
               <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                 <div class="flex-auto p-4">
                   <div class="flex flex-wrap">
@@ -66,7 +66,7 @@
                 <div class="flex-auto p-4">
                   <div class="flex flex-wrap">
                     <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                      <h5 class="text-blueGray-400 uppercase font-bold text-xs">Tiền chờ xử lý</h5><span
+                      <h5 class="text-blueGray-400 uppercase font-bold text-xs">Doanh thu ghi nhận</h5><span
                         class="font-semibold text-xl text-blueGray-700">92,4 triệu</span>
                     </div>
                     <div class="relative w-auto pl-4 flex-initial">
@@ -84,53 +84,19 @@
                 <div class="flex-auto p-4">
                   <div class="flex flex-wrap">
                     <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                      <h5 class="text-blueGray-400 uppercase font-bold text-xs">Doanh thu ghi nhận</h5><span
-                        class="font-semibold text-xl text-blueGray-700">250 triệu</span>
+                      <h5 class="text-blueGray-400 uppercase font-bold text-xs">Xếp hạng doanh thu</h5><span
+                        class="font-semibold text-xl text-blueGray-700">2</span>
                     </div>
                     <div class="relative w-auto pl-4 flex-initial">
                       <div
                         class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-green-500">
-                        <i data-feather="dollar-sign"></i>
+                        <i data-feather="bar-chart"></i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <p class="text-start my-3">Hoạt động mới nhất</p>
-          <div class="overflow-x-auto">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Thời gian</th>
-                  <th>Nhân viên</th>
-                  <th>Khách hàng</th>
-                  <th>Giá trị</th>
-                  <th>Trạng thái</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- row 1 -->
-                <% for( let index=0; index < 5; index++ ) { %>
-                  <tr>
-                    <th>
-                      <%= index +1 %>
-                    </th>
-                    <td class="font-bold mr-1 text-violet-600">3 phút trước</td>
-                    <td class="font-bold mr-1 text-violet-600">Sang</td>
-                    <td class=" font-semibold">Lê Hoàng Nam</td>
-                    <td class=" font-semibold">2,000,000</td>
-                    <td class=" mr-1">đang xử lý </td>
-                  </tr>
-                  <% } %>
-
-
-              </tbody>
-            </table>
           </div>
 
         </div>
@@ -150,7 +116,7 @@
                     <p class="text-center flex flex-row"><i data-feather="map-pin" class="mr-2 w-4"></i>Đà Nẵng</p>
 
                     <a href="#" class="rounded-lg text-red-700 text-xl text-end flex flex-row justify-end"><i
-                        data-feather="edit" class="mr-2"></i>Cập nhật</a>
+                        data-feather="eye" class="mr-2 mt-1"></i>Xem combo</a>
                   </div>
                   <h3 class="text-2xl m2-3 font-bold">Combo 2N1Đ Sona Resort Ninh Bình Trọn Vé Xe Khứ Hồi</h3>
                   <p class="mb-2">Trọn vé xe khứ hồi
@@ -175,9 +141,6 @@
         </div>
       </div>
     </div>
-
-    <!-- add button -->
-    <%- include('m-com-add-button.ejs'); -%>
       <script>
         feather.replace()
       </script>

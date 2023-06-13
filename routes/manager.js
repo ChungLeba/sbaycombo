@@ -21,4 +21,12 @@ router.get('/quan-ly-combo-hoan-thanh', function(req, res, next) {
 router.get('/quan-ly-combo-huy', function(req, res, next) {
   res.render('./manager/m-combo-cancel')
 });
+/* GET users listing. */
+router.get('/quan-ly-nhan-vien', function(req, res, next) {
+  res.render('./manager/m-employee')
+});
+/* GET users listing. */
+router.get('/add-combo', function(req, res, next) {
+  res.render('./manager/m-add-combo')
+});
 module.exports = router;

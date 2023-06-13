@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html data-theme="cupcake">
+
+<head>
+  <title>
+    Combo chờ xử lý | Nhân viên - Sales Management
+  </title>
+  <meta name="author" content="Chung Le Ba">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.0.22/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+
+</head>
+
+<body>
+  <%- include('e-com-topbar.ejs'); -%>
+
+    <div class="px-2">
+      <div class="mx-auto max-w-7xl px-2 lg:px-8">
+        <!--Tabs navigation-->
+        <div class="flex flex-col">
+
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="text-sm breadcrumbs py-2 sm:px-2 lg:px-8 mt-5">
+              <ul>
+                <li><a href="/manager">Combo</a></li>
+                <li>Combo chờ xử lý</li>
+              </ul>
+            </div>
+            <%- include('e-com-combo-status.ejs'); -%>
+              <h1 class="text-2xl mt-5 text-center text-red-600 font-bold">Các Combo chờ xử lý</h1>
+              <div class="inline-block min-w-full py-2 sm:px-2 lg:px-8">
+                <div class="overflow-hidden">
+                  <table class="min-w-full text-left text-sm font-light">
+                    <thead class="border-b font-medium dark:border-neutral-500">
+                      <tr>
+                        <th scope="col" class="px-2 py-4">#</th>
+                        <th scope="col" class="px-2 py-4">Thời gian đặt</th>
+                        <th scope="col" class="px-2 py-4">Khách hàng</th>
+                        <th scope="col" class="px-2 py-4">Mã Combo</th>
+                        <th scope="col" class="px-2 py-4">Tên Combo</th>
+                        <th scope="col" class="px-2 py-4">Giá</th>
+                        <th scope="col" class="px-2 py-4">Hành động</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% for( let index=0; index < 100; index++ ) { %>
+                        <tr
+                          class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                          <td class="whitespace-nowrap px-2 py-4 font-medium">
+                            <%= index +1 %>
+                          </td>
+                          <td class="whitespace-nowrap px-2 py-4">08:08am, ngày 12/12/2022</td>
+                          <td class="whitespace-nowrap px-2 py-4 font-bold">Lê Hoài Bảo</td>
+                          <td class="whitespace-nowrap px-2 py-4">#HN52</td>
+                          <td class="whitespace-nowrap px-2 py-4 font-bold">Combo 2N1Đ Sona Resort Ninh Bình Trọn Vé Xe
+                            Khứ Hồi</td>
+                            <td class="whitespace-nowrap px-2 py-4 font-bold">2,000,000</td>
+                            <td class="whitespace-nowrap px-2 py-4">
+                            <button class="btn btn-sm btn-outline btn-success mr-2">Nhận xử lý</button>
+                          </td>
+                        </tr>
+                        <% } %>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script>
+      feather.replace()
+    </script>
+</body>
+
+</html>
