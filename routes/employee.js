@@ -6,7 +6,6 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('./employee/e-dashboard')
 });
-
 /* GET users listing. */
 router.get('/quan-ly-combo', function(req, res, next) {
   res.render('./employee/e-combo-wait')
