@@ -10,6 +10,11 @@ var employeeRouter = require('./routes/employee');
 
 var app = express();
 
+var helper = require('./helper/helper');
+
+// helper call format price
+app.locals.formatPrice = helper.formatPrice;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
