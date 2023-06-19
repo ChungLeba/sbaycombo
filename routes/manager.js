@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+const multer  = require('multer')
+const upload = multer({ dest: 'public/uploads/' })
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -28,5 +30,10 @@ router.get('/quan-ly-nhan-vien', function(req, res, next) {
 /* GET users listing. */
 router.get('/add-combo', function(req, res, next) {
   res.render('./manager/m-add-combo')
+});
+/* POST COMBO. */
+router.post('/add-combo', upload.array('photos', 12), function(req, res, next) {
+  console.log(req.body);
+  console.log(req.files);
 });
 module.exports = router;
