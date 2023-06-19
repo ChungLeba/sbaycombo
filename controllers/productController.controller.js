@@ -71,9 +71,6 @@ let updateProduct = async (req, res) => {
         if (imageUploads.length == 0) {
             await product_Model.findById(req.params.id)
                                         .then(FoundItem => {
-                                            console.log("Edit product", FoundItem.images);
-                                            // {data: FoundItem};
-                                    
                                             imageUploads = FoundItem.images;
                                         })
                                         .catch(err => {

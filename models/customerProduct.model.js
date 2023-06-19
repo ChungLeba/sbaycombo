@@ -1,6 +1,7 @@
 const { mongoose, Schema } = require('mongoose');
 require('dotenv').config();
 
+
 try {
     mongoose.set("strictQuery", false);
     mongoose.connect(process.env.DBSTRING);
@@ -9,8 +10,9 @@ try {
 }
 // Schema
 const customerProductSchema = new mongoose.Schema({
-    customer: [{ type: Schema.Types.ObjectId, ref: 'customer' }],
-    product: [{ type: Schema.Types.ObjectId, ref: 'product' }]
+    customer_id: [{ type: Schema.Types.ObjectId, ref: 'customerModel' }], //ref tới model
+    product_id: [{ type: Schema.Types.ObjectId, ref: 'productModel' }],
+    status: Number //1: chờ xử lý, 2: đang xử lý, 3: hoàn thành, 4: huỷ
 
 },
 {collection: 'customer_product'}
