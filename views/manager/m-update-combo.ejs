@@ -4,10 +4,9 @@
 
 <head>
   <title>
-    SBAY | Thêm combo
+    SBAY | Cập nhật combo
   </title>
   <meta name="author" content="Chung Le Ba">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -31,10 +30,12 @@
 </head>
 
 <body>
+
+
   <section class="bg-gray-50 dark:bg-gray-900">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen">
-      <h1 class="mb-5 text-2xl font-bold text-red-600 mt-5">Thêm combo</h1>
-      <form action="/manager/new-add-combo" method="post" enctype="multipart/form-data">
+      <h1 class="mb-5 text-2xl font-bold text-red-600 mt-5">Cập nhật combo</h1>
+      <form action="/manager/update-combo/<%= data._id %>" method="post" enctype="multipart/form-data">
         <div class="grid grid-cols-12 gap-4 bg-slate-100 p-5 rounded-lg ">
           <div class="col-span-4">
             <h2 class="text-xl mb-3 text-center">Thông tin combo</h2>
@@ -44,49 +45,49 @@
                   combo</label>
                 <input type="text" name="name" id="ten-combo"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Combo 2N1Đ Đà Nẵng ..." required="">
+                  placeholder="Combo 2N1Đ Đà Nẵng ..." value="<%= data.name %>" required="">
               </div>
               <div>
                 <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">2.Vị
                   trí</label>
                 <input type="text" name="location" id="location"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Đà Nẵng" required="">
+                  placeholder="Đà Nẵng" value="<%= data.location %>" required="">
               </div>
               <div>
                 <label for="code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">3.Mã combo</label>
                 <input type="text" name="code" id="code"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="DN01" required="">
+                  placeholder="DN01" value="<%= data.code %>" required="">
               </div>
               <div>
                 <label for="code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">4.Thời gian bao
                   lâu?</label>
                 <input type="text" name="timeCombo" id="code"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="2 ngày 3 đêm" required="">
+                  placeholder="2 ngày 3 đêm" value="<%= data.timeCombo %>" required="">
               </div>
               <div>
                 <label for="code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">5.Loại giá</label>
                 <div class="form-control ml-2">
                   <label class="label cursor-pointer">
                     <span class="label-text">Giá cố định</span>
-                    <input type="radio" name="priceType" class="radio checked:bg-red-500" checked value="1" />
+                    <input type="radio" name="priceType" class="radio checked:bg-red-500"  value="1" <%= data.priceType == 1 ? 'checked' : '' %> />
                   </label>
                   <input type="number" name="price" id="price"
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="1000000" required="">
+                    placeholder="1000000" value="<%= data.price %>" required="">
                 </div>
                 <div class="form-control ml-2">
                   <label class="label cursor-pointer">
                     <span class="label-text">Giá từ</span>
-                    <input type="radio" name="priceType" class="radio checked:bg-green-500" value="2" />
+                    <input type="radio" name="priceType" class="radio checked:bg-green-500" value="2" <%= data.priceType == 2 ? 'checked' : '' %> />
                   </label>
                 </div>
                 <div class="form-control ml-2">
                   <label class="label cursor-pointer">
                     <span class="label-text">Giá liên hệ</span>
-                    <input type="radio" name="priceType" class="radio checked:bg-blue-500" value="3" />
+                    <input type="radio" name="priceType" class="radio checked:bg-blue-500" value="3" <%= data.priceType == 3 ? 'checked' : '' %> />
                   </label>
                 </div>
               </div>
@@ -95,14 +96,18 @@
           <!-- ... -->
           <div class="col-span-8">
             <h2 class="text-xl mb-3 text-center">Mô tả combo</h2>
-            <textarea name="description"></textarea>
+            <textarea name="description"><%= data.description %></textarea>
             <label class="label cursor-pointer">
               <span class="label-text mt-3">Hình ảnh đính kèm (hãy chọn 3,6,9 hình ảnh để hiển thị cho đẹp)</span>
             </label>
-            <input id="imgInp" type="file" name="images" class="file-input file-input-bordered file-input-xs w-full max-w-xs" accept="image/*" multiple/>
-            <div id="imgPreview" class="flex"></div>
+            <input id="imgInp" type="file" name="images" class="file-input file-input-bordered file-input-xs w-full max-w-xs" accept="image/*" value="<%= data.images %>" multiple/>
+            <div id="imgPreview" class="flex">
+              <% for (let index = 0; index < data.images.length; index++) { %>
+                <img class="w-20 h-20" src="/uploads/<%= data.images[index] %>" alt="">
+              <% } %>
+            </div>
             <button type="submit"
-              class="mt-3 w-full text-white bg-red-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Thêm
+              class="mt-3 w-full text-white bg-red-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Cập nhật
               Combo</button>
           </div>
         </div>
@@ -119,17 +124,14 @@
             imagesPreview.empty(); // Xóa nội dung hiện tại
             $.each(input.files, function(i, file){
                 var reader = new FileReader();
-
                 reader.onload = function (e) {
                     var img = $('<img class="w-20 h-20">').attr('src', e.target.result);
                     imagesPreview.append(img);
                 }
-
                 reader.readAsDataURL(file);
             });
         }
     }
-
     $("#imgInp").change(function(){
         readURL(this);
     });
