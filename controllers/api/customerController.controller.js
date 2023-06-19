@@ -19,7 +19,8 @@ let saveCustomer = async(req, res) => {
             res.send(data);
             customerProduct_Model.create({
                 customer: data._id,
-                product: req.body.productId
+                product: req.body.productId,
+                status: 1
             })
         })
         .catch(err => {

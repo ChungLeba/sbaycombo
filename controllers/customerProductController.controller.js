@@ -1,15 +1,18 @@
-var customerModel = require('../models/customer.model');
-// var customerProductModel = require('../models/customerProduct.model');
+// var customerModel = require('../models/customer.model');
+var customerProductModel = require('../models/customerProduct.model');
 
 // Get All Customer
 let getAllCustomer = async(req, res) => {
     try {
         async function getItems() {
-            const Items = await customerModel.find({}).populate('product').exec();
+            const Items = await customerProductModel.find({})
+            .populate('product')// populate tại trường nào
+            .populate('customer');
             return Items;
         }
 
         getItems().then(function(FoundItems) {
+            // res.send({data: FoundItems});
             res.render('./manager/m-combo-wait', {data: FoundItems});
         });
     } catch (error) {

@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 const multer = require('multer');
 const productController = require('../controllers/productController.controller');
-const customerController = require('../controllers/customerController.controller');
+const customerProductController = require('../controllers/customerProductController.controller');
 
+// upload image multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './public/uploads/');
@@ -16,7 +17,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 /* GET users listing. */
-router.get('/quan-ly-combo-cho-xu-ly', customerController.getAllCustomer);
+router.get('/quan-ly-combo-cho-xu-ly', customerProductController.getAllCustomer);
 /* GET users listing. */
 router.get('/quan-ly-combo-dang-xu-ly', function(req, res, next) {
   res.render('./manager/m-combo-processing')
