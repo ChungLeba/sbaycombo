@@ -18,8 +18,8 @@ let saveCustomer = async(req, res) => {
         .then(data => {
             res.send(data);
             customerProduct_Model.create({
-                customer: data._id,
-                product: req.body.productId,
+                customer_id: data._id,
+                product_id: req.body.productId,
                 status: 1
             })
         })

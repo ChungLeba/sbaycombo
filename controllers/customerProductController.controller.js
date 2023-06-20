@@ -6,8 +6,8 @@ let getAllCustomer = async(req, res) => {
     try {
         async function getItems() {
             const Items = await customerProductModel.find({})
-            .populate('product')// populate tại trường nào
-            .populate('customer');
+            .populate('product_id')// populate tại trường nào
+            .populate('customer_id');
             return Items;
         }
 
