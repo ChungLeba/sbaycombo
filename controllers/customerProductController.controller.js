@@ -6,8 +6,9 @@ let getAllCustomer = async(req, res) => {
     try {
         async function getItems() {
             const Items = await customerProductModel.find({})
-            .populate('product_id')// populate tại trường nào
-            .populate('customer_id');
+            .populate('product_id') // populate tại trường nào
+            .populate('customer_id')
+            .sort({'timeCreate': 'desc'}); // sắp xếp theo thứ tự mới nhất -> cũ nhất
             return Items;
         }
 

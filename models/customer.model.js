@@ -17,15 +17,7 @@ const customerSchema = new mongoose.Schema({
     arrivalDate: Date,
     phone: Number,
     departurePlace: String,
-    otherRequirements: String,
-    timeCreate: {
-        type: Date,
-        default: Date.now
-    },
-    timeUpdate: {
-        type: Date,
-        default: Date.now
-    }
+    otherRequirements: String
 },
 {collection: 'customer'}
 )
