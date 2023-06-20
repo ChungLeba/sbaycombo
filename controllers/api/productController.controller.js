@@ -16,6 +16,22 @@ let getAllProduct = async(req, res) => {
     }
 };
 
+// Get 3 product
+let getLimitProduct = async(req, res) => {
+    try {
+        async function getItems() {
+            const Items = await product_Model.find({}).limit(3);
+            return Items;
+          }
+
+        getItems().then(function(FoundItems){
+            res.send({data: FoundItems});
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 // Show product
 let showProduct = async(req, res) => {
     try {
@@ -33,5 +49,6 @@ let showProduct = async(req, res) => {
 
 module.exports = {
     getAllProduct: getAllProduct,
+    getLimitProduct: getLimitProduct,
     showProduct: showProduct
 };

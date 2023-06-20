@@ -4,6 +4,8 @@ const productController = require('../../controllers/api/productController.contr
 
 /* GET API products listing. */
 router.get('/', productController.getAllProduct);
+/* GET API limit 3 product */
+router.get('/limit', productController.getLimitProduct);
 /* GET API show product */
 router.get('/show-combo/:id', productController.showProduct);
 
