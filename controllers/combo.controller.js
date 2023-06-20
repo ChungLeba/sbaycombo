@@ -16,8 +16,8 @@ let getAllCombo = async(req, res) => {
     }
 };
 
-// Save new product
-let saveProduct = async(req, res) => {
+// Create new product
+let createCombo = async(req, res) => {
     try {
         var imageUploads = [];
         for (var i = 0; i < req.files.length; i++) {
@@ -45,8 +45,8 @@ let saveProduct = async(req, res) => {
     }
 };
 
-// Edit product
-let editProduct = async(req, res) => {
+// Read product
+let readCombo = async(req, res) => {
     try {
         comboModel.findById(req.params.id)
         .then(FoundItem => {
@@ -62,7 +62,7 @@ let editProduct = async(req, res) => {
 }
 
 // Update product
-let updateProduct = async (req, res) => {
+let updateCombo = async (req, res) => {
     try {
         var imageUploads = [];
         for (var i = 0; i < req.files.length; i++) {
@@ -102,7 +102,7 @@ let updateProduct = async (req, res) => {
 }
 
 // Delete product
-let deleteProduct = async (req, res) => {
+let deleteCombo = async (req, res) => {
     try {
         await comboModel.findByIdAndDelete(req.params.id);
         res.redirect("/manager");
@@ -114,8 +114,8 @@ let deleteProduct = async (req, res) => {
 
 module.exports = {
     getAllCombo: getAllCombo,
-    saveProduct: saveProduct,
-    editProduct: editProduct,
-    updateProduct: updateProduct,
-    deleteProduct: deleteProduct
+    createCombo: createCombo,
+    readCombo: readCombo,
+    updateCombo: updateCombo,
+    deleteCombo: deleteCombo
 };

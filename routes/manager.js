@@ -41,11 +41,11 @@ router.get('/add-combo', function(req, res, next) {
 /* GET combos listing. */
 router.get('/', comboController.getAllCombo);
 /* POST add new combo */
-router.post('/new-add-combo', upload.array('images', 20), comboController.saveProduct);
+router.post('/new-add-combo', upload.array('images', 20), comboController.createCombo);
 /* GET edit combo */
-router.get('/edit-combo/:id', comboController.editProduct);
+router.get('/edit-combo/:id', comboController.readCombo);
 /* POST update combo */
-router.post('/update-combo/:id', upload.array('images', 20), comboController.updateProduct);
+router.post('/update-combo/:id', upload.array('images', 20), comboController.updateCombo);
 /* DELETE detele combo */
-router.post('/delete-combo/:id', comboController.deleteProduct);
+router.post('/delete-combo/:id', comboController.deleteCombo);
 module.exports = router;

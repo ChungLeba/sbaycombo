@@ -2,7 +2,7 @@ var customer_Model = require('../../models/customer.model');
 var orderComboModel = require('../../models/orderCombo.model');
 
 // Save new customer
-let saveCustomer = async(req, res) => {
+let createCustomer = async(req, res) => {
     try {
         customer_Model.create({
             name: req.body.name,
@@ -32,5 +32,5 @@ let saveCustomer = async(req, res) => {
 };
 
 module.exports = {
-    saveCustomer: saveCustomer
+    createCustomer: createCustomer
 }
