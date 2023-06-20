@@ -1,11 +1,11 @@
 // var customerModel = require('../models/customer.model');
-var customerProductModel = require('../models/customerProduct.model');
+var orderComboModel = require('../models/orderCombo.model');
 
 // Get All Customer
 let getAllCustomer = async(req, res) => {
     try {
         async function getItems() {
-            const Items = await customerProductModel.find({})
+            const Items = await orderComboModel.find({})
             .populate('product_id') // populate tại trường nào
             .populate('customer_id')
             .sort({'timeCreate': 'desc'}); // sắp xếp theo thứ tự mới nhất -> cũ nhất

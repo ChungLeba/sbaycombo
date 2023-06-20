@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const multer = require('multer');
-const productController = require('../controllers/productController.controller');
-const customerProductController = require('../controllers/customerProductController.controller');
+const comboController = require('../controllers/combo.controller');
+const orderComboController = require('../controllers/orderCombo.controller');
 
 // upload image multer
 const storage = multer.diskStorage({
@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 /* GET users listing. */
-router.get('/quan-ly-combo-cho-xu-ly', customerProductController.getAllCustomer);
+router.get('/quan-ly-combo-cho-xu-ly', orderComboController.getAllCustomer);
 /* GET users listing. */
 router.get('/quan-ly-combo-dang-xu-ly', function(req, res, next) {
   res.render('./manager/m-combo-processing')
@@ -39,13 +39,13 @@ router.get('/add-combo', function(req, res, next) {
   res.render('./manager/m-add-combo')
 });
 /* GET combos listing. */
-router.get('/', productController.getAllProduct);
+router.get('/', comboController.getAllCombo);
 /* POST add new combo */
-router.post('/new-add-combo', upload.array('images', 20), productController.saveProduct);
+router.post('/new-add-combo', upload.array('images', 20), comboController.saveProduct);
 /* GET edit combo */
-router.get('/edit-combo/:id', productController.editProduct);
+router.get('/edit-combo/:id', comboController.editProduct);
 /* POST update combo */
-router.post('/update-combo/:id', upload.array('images', 20), productController.updateProduct);
+router.post('/update-combo/:id', upload.array('images', 20), comboController.updateProduct);
 /* DELETE detele combo */
-router.post('/delete-combo/:id', productController.deleteProduct);
+router.post('/delete-combo/:id', comboController.deleteProduct);
 module.exports = router;

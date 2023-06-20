@@ -11,8 +11,8 @@ try {
 // Schema
 const customerProductSchema = new mongoose.Schema({
     customer_id: [{ type: Schema.Types.ObjectId, ref: 'customerModel' }], //ref tới model
-    product_id: [{ type: Schema.Types.ObjectId, ref: 'productModel' }],
-    status: Number, //1: chờ xử lý, 2: đang xử lý, 3: hoàn thành, 4: huỷ
+    product_id: [{ type: Schema.Types.ObjectId, ref: 'comboModel' }],
+    status: { type: String, default: 'wait' }, //wait: chờ xử lý, processing: đang xử lý, complete: hoàn thành, cancel: huỷ
     timeCreate: {
         type: Date,
         default: Date.now()
@@ -23,7 +23,7 @@ const customerProductSchema = new mongoose.Schema({
     }
 
 },
-{collection: 'customer_product'}
+{collection: 'orderCombo'}
 )
 // Model
 const customerProductModel = mongoose.model('customerProductModel', customerProductSchema);

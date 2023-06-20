@@ -1,10 +1,10 @@
-var product_Model = require('../models/product.model');
+var comboModel = require('../models/combo.model');
 
 // Get all product
-let getAllProduct = async(req, res) => {
+let getAllCombo = async(req, res) => {
     try {
         async function getItems() {
-            const Items = await product_Model.find({});
+            const Items = await comboModel.find({});
             return Items;
           }
 
@@ -24,7 +24,7 @@ let saveProduct = async(req, res) => {
             imageUploads.push(req.files[i].filename)
         }
             
-        product_Model.create({
+        comboModel.create({
             name: req.body.name,
             location: req.body.location,
             code: req.body.code,
@@ -48,7 +48,7 @@ let saveProduct = async(req, res) => {
 // Edit product
 let editProduct = async(req, res) => {
     try {
-        product_Model.findById(req.params.id)
+        comboModel.findById(req.params.id)
         .then(FoundItem => {
             console.log("Edit product", FoundItem);
             res.render('./manager/m-update-combo', {data: FoundItem});
@@ -69,7 +69,7 @@ let updateProduct = async (req, res) => {
             imageUploads.push(req.files[i].filename)
         }
         if (imageUploads.length == 0) {
-            await product_Model.findById(req.params.id)
+            await comboModel.findById(req.params.id)
                                         .then(FoundItem => {
                                             imageUploads = FoundItem.images;
                                         })
@@ -77,7 +77,7 @@ let updateProduct = async (req, res) => {
                                             console.log("error edit product");
                                         });
         }
-        await product_Model.findByIdAndUpdate(
+        await comboModel.findByIdAndUpdate(
             req.params.id,
             {
                 name: req.body.name, 
@@ -104,7 +104,7 @@ let updateProduct = async (req, res) => {
 // Delete product
 let deleteProduct = async (req, res) => {
     try {
-        await product_Model.findByIdAndDelete(req.params.id);
+        await comboModel.findByIdAndDelete(req.params.id);
         res.redirect("/manager");
     } catch (error) {
         console.log("error", error);
@@ -113,7 +113,7 @@ let deleteProduct = async (req, res) => {
 }
 
 module.exports = {
-    getAllProduct: getAllProduct,
+    getAllCombo: getAllCombo,
     saveProduct: saveProduct,
     editProduct: editProduct,
     updateProduct: updateProduct,

@@ -8,7 +8,7 @@ try {
     handleError(error);
 }
 // Schema
-const productSchema = new mongoose.Schema({
+const comboSchema = new mongoose.Schema({
     name: String,
     location: String,
     code: String,
@@ -26,9 +26,9 @@ const productSchema = new mongoose.Schema({
         default: Date.now
     }
 },
-{collection: 'product'}
+{collection: 'combo'}
 )
 // Model
-const productModel = mongoose.model('productModel', productSchema);
+const comboModel = mongoose.model('comboModel', comboSchema);
 
-module.exports = productModel;
+module.exports = comboModel;

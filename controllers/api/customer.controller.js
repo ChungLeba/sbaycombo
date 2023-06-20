@@ -1,5 +1,5 @@
 var customer_Model = require('../../models/customer.model');
-var customerProduct_Model = require('../../models/customerProduct.model');
+var orderComboModel = require('../../models/orderCombo.model');
 
 // Save new customer
 let saveCustomer = async(req, res) => {
@@ -17,7 +17,7 @@ let saveCustomer = async(req, res) => {
         })
         .then(data => {
             res.send(data);
-            customerProduct_Model.create({
+            orderComboModel.create({
                 customer_id: data._id,
                 product_id: req.body.productId,
                 status: 1

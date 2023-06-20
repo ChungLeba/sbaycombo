@@ -1,10 +1,10 @@
-var product_Model = require('../../models/product.model');
+var comboModel = require('../../models/combo.model');
 
 // Get all product
-let getAllProduct = async(req, res) => {
+let getAllCombo = async(req, res) => {
     try {
         async function getItems() {
-            const Items = await product_Model.find({});
+            const Items = await comboModel.find({});
             return Items;
           }
 
@@ -17,10 +17,10 @@ let getAllProduct = async(req, res) => {
 };
 
 // Get 3 product
-let getLimitProduct = async(req, res) => {
+let getLimitCombo = async(req, res) => {
     try {
         async function getItems() {
-            const Items = await product_Model.find({}).limit(3);
+            const Items = await comboModel.find({}).limit(3);
             return Items;
           }
 
@@ -33,9 +33,9 @@ let getLimitProduct = async(req, res) => {
 };
 
 // Show product
-let showProduct = async(req, res) => {
+let showCombo = async(req, res) => {
     try {
-        product_Model.findById(req.params.id)
+        comboModel.findById(req.params.id)
         .then(FoundItem => {
             res.send({data: FoundItem});
         })
@@ -48,7 +48,7 @@ let showProduct = async(req, res) => {
 }
 
 module.exports = {
-    getAllProduct: getAllProduct,
-    getLimitProduct: getLimitProduct,
-    showProduct: showProduct
+    getAllCombo: getAllCombo,
+    getLimitCombo: getLimitCombo,
+    showCombo: showCombo
 };

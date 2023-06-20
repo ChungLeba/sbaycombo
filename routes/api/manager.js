@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const productController = require('../../controllers/api/productController.controller');
+const comboController = require('../../controllers/api/combo.controller');
 
 /* GET API products listing. */
-router.get('/', productController.getAllProduct);
+router.get('/', comboController.getAllCombo);
 /* GET API limit 3 product */
-router.get('/limit', productController.getLimitProduct);
+router.get('/limit', comboController.getLimitCombo);
 /* GET API show product */
-router.get('/show-combo/:id', productController.showProduct);
+router.get('/show-combo/:id', comboController.showCombo);
 
 module.exports = router;
