@@ -63,7 +63,7 @@
               <div>
                 <label for="code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">4.Thời gian bao
                   lâu?</label>
-                <input type="text" name="timeCombo" id="code"
+                <input type="text" name="timeCombo" id="timelong"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="2 ngày 3 đêm" value="<%= data.timeCombo %>" required="">
               </div>
@@ -101,9 +101,9 @@
               <span class="label-text mt-3">Hình ảnh đính kèm (hãy chọn 3,6,9 hình ảnh để hiển thị cho đẹp)</span>
             </label>
             <input id="imgInp" type="file" name="images" class="file-input file-input-bordered file-input-xs w-full max-w-xs" accept="image/*" value="<%= data.images %>" multiple/>
-            <div id="imgPreview" class="flex">
+            <div id="imgPreview" class="grid grid-cols-6 gap-2 p-2 align-middle">
               <% for (let index = 0; index < data.images.length; index++) { %>
-                <img class="w-20 h-20" src="/uploads/<%= data.images[index] %>" alt="">
+                <img class="w-20 rounded-md self-center ..." src="/uploads/<%= data.images[index] %>" alt="">
               <% } %>
             </div>
             <button type="submit"
@@ -112,7 +112,7 @@
           </div>
         </div>
       </form>
-      <a href="/manager" class="text-center mt-3 underline text-red-600">Về trang quản lý</a>
+      <a href="/manager" class="text-center underline text-red-600">Về trang quản lý</a>
 
     </div>
   </section>
