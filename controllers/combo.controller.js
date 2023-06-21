@@ -1,15 +1,35 @@
 var comboModel = require('../models/combo.model');
 
-// Get all product
-let getAllCombo = async(req, res) => {
+// Get active combo
+let getActiveCombo = async(req, res) => {
     try {
         async function getItems() {
-            const Items = await comboModel.find({});
+            const Items = await comboModel.find({
+                active: true
+            });
             return Items;
           }
 
         getItems().then(function(FoundItems){
             res.render('./manager/m-dashboard', {data: FoundItems})
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+// Get active combo
+let getAllCombo = async(req, res) => {
+    try {
+        async function getItems() {
+            const Items = await comboModel.find({
+
+            });
+            return Items;
+          }
+        getItems().then(function(FoundItems){
+            //console.log(FoundItems);
+            res.render('./manager/m-allCombos.ejs', {data: FoundItems})
         });
     } catch (error) {
         console.log(error);
@@ -45,8 +65,22 @@ let createCombo = async(req, res) => {
     }
 };
 
-// Read product
-let readCombo = async(req, res) => {
+// Read to view product
+let readToViewCombo = async(req, res) => {
+    try {
+        comboModel.findById(req.params.id)
+        .then(FoundItem => {
+            res.render('./manager/m-read-combo', {data: FoundItem});
+        })
+        .catch(err => {
+            console.log("error");
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+// Read to update product
+let readToUpdateCombo = async(req, res) => {
     try {
         comboModel.findById(req.params.id)
         .then(FoundItem => {
@@ -113,9 +147,11 @@ let deleteCombo = async (req, res) => {
 }
 
 module.exports = {
+    getActiveCombo: getActiveCombo,
     getAllCombo: getAllCombo,
     createCombo: createCombo,
-    readCombo: readCombo,
+    readToViewCombo:readToViewCombo,
+    readToUpdateCombo: readToUpdateCombo,
     updateCombo: updateCombo,
     deleteCombo: deleteCombo
 };

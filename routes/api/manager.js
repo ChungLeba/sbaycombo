@@ -3,7 +3,7 @@ var router = express.Router();
 const comboController = require('../../controllers/api/combo.controller');
 
 /* GET API products listing. */
-router.get('/', comboController.getAllCombo);
+router.get('/', comboController.getActiveCombo);
 /* GET API limit 3 product */
 router.get('/limit', comboController.getLimitCombo);
 /* GET API show product */
