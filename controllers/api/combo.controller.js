@@ -47,8 +47,21 @@ let showCombo = async(req, res) => {
     }
 }
 
+// Show remaining combos
+let remainingCombo = async(req, res) => {
+    try {
+        // Truy vấn để lấy các combo còn lại và loại bỏ combo cụ thể
+        const query = { _id: { $nin: [req.params.id] } };
+        const result = await comboModel.find(query);
+        res.send({data: result});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     getAllCombo: getAllCombo,
     getLimitCombo: getLimitCombo,
-    showCombo: showCombo
+    showCombo: showCombo,
+    remainingCombo: remainingCombo
 };
