@@ -3,7 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var moment = require('moment');
+moment.locale('vi');
 
 var indexRouter = require('./routes/index');
 var managerRouter = require('./routes/manager');
@@ -14,6 +15,7 @@ var apiManagerRouter = require('./routes/api/manager');
 var apiCustomerRouter = require('./routes/api/customer');
 
 var app = express();
+app.locals.moment = moment
 
 var helper = require('./helper/helper');
 

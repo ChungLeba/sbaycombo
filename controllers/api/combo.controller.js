@@ -1,7 +1,7 @@
 var comboModel = require('../../models/combo.model');
 
-// Get all product
-let getAllCombo = async(req, res) => {
+// Get all combo
+let getActiveCombo = async(req, res) => {
     try {
         async function getItems() {
             const Items = await comboModel.find({});
@@ -16,7 +16,7 @@ let getAllCombo = async(req, res) => {
     }
 };
 
-// Get 3 product
+// Get 3 combo
 let getLimitCombo = async(req, res) => {
     try {
         async function getItems() {
@@ -32,7 +32,7 @@ let getLimitCombo = async(req, res) => {
     }
 };
 
-// Show product
+// Show combo
 let showCombo = async(req, res) => {
     try {
         comboModel.findById(req.params.id)
@@ -40,7 +40,7 @@ let showCombo = async(req, res) => {
             res.send({data: FoundItem});
         })
         .catch(err => {
-            console.log("error show product");
+            console.log("error show combo");
         });
     } catch (error) {
         console.log(error);
@@ -60,7 +60,7 @@ let remainingCombo = async(req, res) => {
 }
 
 module.exports = {
-    getAllCombo: getAllCombo,
+    getActiveCombo: getActiveCombo,
     getLimitCombo: getLimitCombo,
     showCombo: showCombo,
     remainingCombo: remainingCombo

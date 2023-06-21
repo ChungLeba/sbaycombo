@@ -13,9 +13,10 @@ const comboSchema = new mongoose.Schema({
     location: String,
     code: String,
     timeCombo: String,
-    priceType: Number,
+    priceType: Number, //1: co dinh, 2:gia tu, 3:gia lien he
     price: Number,
     description: String,
+    active:{ type: Boolean, default: false},
     images: [],
     timeCreate: {
         type: Date,

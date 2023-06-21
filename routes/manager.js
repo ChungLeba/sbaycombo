@@ -30,6 +30,10 @@ router.get('/quan-ly-combo-hoan-thanh', function(req, res, next) {
 router.get('/quan-ly-combo-huy', function(req, res, next) {
   res.render('./manager/m-combo-cancel')
 });
+
+/* GET Quản lý combo. */
+router.get('/quan-ly-combo', comboController.getAllCombo);
+
 /* GET users listing. */
 router.get('/quan-ly-nhan-vien', function(req, res, next) {
   res.render('./manager/m-employee')
@@ -39,13 +43,16 @@ router.get('/add-combo', function(req, res, next) {
   res.render('./manager/m-add-combo')
 });
 /* GET combos listing. */
-router.get('/', comboController.getAllCombo);
+router.get('/', comboController.getActiveCombo);
 /* POST add new combo */
 router.post('/new-add-combo', upload.array('images', 20), comboController.createCombo);
 /* GET edit combo */
-router.get('/edit-combo/:id', comboController.readCombo);
+router.get('/edit-combo/:id', comboController.readToUpdateCombo);
 /* POST update combo */
 router.post('/update-combo/:id', upload.array('images', 20), comboController.updateCombo);
 /* DELETE detele combo */
 router.post('/delete-combo/:id', comboController.deleteCombo);
+/* Read 1 combo */
+router.get('/combo/:id', comboController.readToViewCombo);
+
 module.exports = router;

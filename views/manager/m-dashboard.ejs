@@ -157,14 +157,14 @@
                       <%= data[index].location %>
                     </p>
                     <div class="flex flex-row justify-end">
-                      <a href="#"
+                      <!-- <a href="#"
                         class="btn btn-sm mr-2 rounded-lg text-green-700 text-end flex flex-row justify-end"><i
-                          data-feather="eye" class="w-4 h-4"></i>Xem</a>
+                          data-feather="eye" class="w-4 h-4"></i>Xem</a> -->
                       <a href="/manager/edit-combo/<%= data[index].id %>"
                         class="btn btn-sm mr-2 rounded-lg text-orange-700 text-end flex flex-row justify-end"><i
                           data-feather="edit" class="w-4 h-4"></i>Cập nhật</a>
                         <button href="#"
-                          class="btn btn-sm mr-2 rounded-lg text-stone-500 text-end flex flex-row justify-end t"><i
+                          class="btn btn-sm mr-2 rounded-lg text-stone-500 text-end flex flex-row justify-end"><i
                             data-feather="pause" class="w-4 h-4"></i> Ngưng</button>
 
                     </div>
@@ -172,9 +172,11 @@
 
 
                   </div>
-                  <h3 class="text-2xl mb-2 font-bold">
-                    <%= data[index].name %>
-                  </h3>
+                  <a href="/manager/combo/<%= data[index].id %>">
+                    <h3 class="text-2xl mb-2 font-bold hover:text-red-600">
+                      <%= data[index].name %>
+                    </h3>
+                  </a>
                   
                     <p class="flex flex-row mb-2 italic"><%- data[index].description.slice(0,300).replace(regex, "" ) %>
                     </p>
