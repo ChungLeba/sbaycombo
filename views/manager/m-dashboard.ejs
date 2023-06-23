@@ -11,6 +11,8 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.0.22/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
@@ -21,7 +23,7 @@
 
     <div class="mx-auto max-w-7xl px-2 lg:px-8 mt-5">
 
-      <div class="px-4 mx-auto w-full">
+      <div class="px-2 mx-auto w-full">
         <h1 class="text-2xl mt-5 text-start text-red-600 font-bold mb-5">Tổng quan</h1>
         <div>
           <div class="flex flex-wrap animate__animated animate__pulse">
@@ -135,13 +137,13 @@
 
         </div>
       </div>
-      <p class="text-start ml-5 my-3 font-bold">Các bombo đang áp dụng</p>
+      <p class="text-start my-3 font-bold">Các bombo đang áp dụng</p>
       <div class=" px-2 lg:overflow-visible lg:px-0">
-        <div class="mx-auto max-w-7xl px-2 lg:px-8">
+        <div class="mx-auto max-w-7xl">
           <% var regex=/(<([^>]+)>)/ig %>
           <div class="grid grid-row-4 gap-4">
             <% for( let index=0; index < data.length; index++ ) { %>
-              <div class="grid lg:grid-cols-12 sm:grid-row-4 p-5 bg-white rounded-lg shadow-xl">
+              <div class="grid lg:grid-cols-12 sm:grid-row-4 bg-white rounded-lg shadow-xl">
                 <div class="lg:col-span-4 mt-3 p-2">
                   <img src="/uploads/<%= data[index].images[0] %>" class="rounded-lg mx-auto w-full" alt="">
 
@@ -151,7 +153,7 @@
                       <% } %>
                   </div>
                 </div>
-                <div class="lg:col-span-8 p-5">
+                <div class="lg:col-span-8 py-5 pl-2">
                   <div class="grid grid-cols-2">
                     <p class="text-center flex flex-row text-green-600"><i data-feather="map-pin" class="mr-2 w-4"></i>
                       <%= data[index].location %>
@@ -160,27 +162,27 @@
                       <!-- <a href="#"
                         class="btn btn-sm mr-2 rounded-lg text-green-700 text-end flex flex-row justify-end"><i
                           data-feather="eye" class="w-4 h-4"></i>Xem</a> -->
-                      <a href="/manager/edit-combo/<%= data[index].id %>"
-                        class="btn btn-sm mr-2 rounded-lg text-orange-700 text-end flex flex-row justify-end"><i
-                          data-feather="edit" class="w-4 h-4"></i>Cập nhật</a>
-                        <button href="#"
+                      
+                          <div class="hidden md:block">
+                            <a href="/manager/edit-combo/<%= data[index].id %>"
+                              class="btn btn-sm mr-2 rounded-lg text-orange-700 text-end flex flex-row justify-end"><i
+                                data-feather="edit" class="w-4 h-4"></i>Cập nhật</a>
+                          </div>
+                        <button onclick="deactive(this.id)" id="<%= data[index]._id %>"
                           class="btn btn-sm mr-2 rounded-lg text-stone-500 text-end flex flex-row justify-end"><i
                             data-feather="pause" class="w-4 h-4"></i> Ngưng</button>
 
                     </div>
-
-
-
                   </div>
                   <a href="/manager/combo/<%= data[index].id %>">
-                    <h3 class="text-2xl mb-2 font-bold hover:text-red-600">
+                    <h3 class="text-2xl my-2 font-bold hover:text-red-600">
                       <%= data[index].name %>
                     </h3>
                   </a>
                   
                     <p class="flex flex-row mb-2 italic"><%- data[index].description.slice(0,300).replace(regex, "" ) %>
                     </p>
-                    <div class="grid grid-cols-2 mt-2">
+                    <div class="grid lg:grid-cols-2 sm:grid-cols-1  mt-2">
                       <div>
                         <p class="flex flex-row mb-2 font-bold"><i data-feather="code" class="mr-2 w-4"></i>Mã Combo: <%=
                           data[index].code %>
@@ -208,8 +210,36 @@
     </div>
     <!-- add button -->
     <%- include('m-com-add-button.ejs'); -%>
+    <%- include('m-com-bottombar'); -%>
+    
       <script>
         feather.replace()
+        
+        
+        /* deactive */
+        function deactive(comboId) {
+          if (confirm("Bạn muốn ngưng combo này?") == true) {
+            //console.log(comboId);
+            axios({
+              method: 'put',
+              url: 'http://localhost:3000/manager/deactive-combo/',
+              data: {
+                id: comboId,
+              }
+            })
+              .then(function (res) {
+                console.log(res.data);
+                if (res.data.noiti == 'deactive') {
+                  alert('Ngưng thành công')
+                  window.location.reload()
+                } else {
+                  alert('có lỗi, vui lòng thông báo cho IT')
+                }
+              });
+          }
+
+        }
+        
       </script>
 </body>
 

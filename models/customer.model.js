@@ -15,7 +15,7 @@ const customerSchema = new mongoose.Schema({
     email: String,
     departureDay: Date,
     arrivalDate: Date,
-    phone: Number,
+    phone: String,
     departurePlace: String,
     otherRequirements: String
 },

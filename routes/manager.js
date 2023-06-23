@@ -3,6 +3,7 @@ var router = express.Router();
 const multer = require('multer');
 const comboController = require('../controllers/combo.controller');
 const orderComboController = require('../controllers/orderCombo.controller');
+const managerController = require('../controllers/manager.controller');
 
 // upload image multer
 const storage = multer.diskStorage({
@@ -31,13 +32,14 @@ router.get('/quan-ly-combo-huy', function(req, res, next) {
   res.render('./manager/m-combo-cancel')
 });
 
+/* GET 1 orderCombo */
+router.get('/orderCombo/:id', orderComboController.oneOrderCombo);
+
 /* GET Quản lý combo. */
 router.get('/quan-ly-combo', comboController.getAllCombo);
 
 /* GET users listing. */
-router.get('/quan-ly-nhan-vien', function(req, res, next) {
-  res.render('./manager/m-employee')
-});
+router.get('/quan-ly-nhan-vien', managerController.findAllEmployee);
 /* GET users listing. */
 router.get('/add-combo', function(req, res, next) {
   res.render('./manager/m-add-combo')
@@ -54,5 +56,9 @@ router.post('/update-combo/:id', upload.array('images', 20), comboController.upd
 router.post('/delete-combo/:id', comboController.deleteCombo);
 /* Read 1 combo */
 router.get('/combo/:id', comboController.readToViewCombo);
+/* Active combo */
+router.put('/active-combo', comboController.activeCombo);
+/* deactive combo */
+router.put('/deactive-combo', comboController.deactiveCombo);
 
 module.exports = router;
