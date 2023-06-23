@@ -11,6 +11,8 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.0.22/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
 
@@ -25,7 +27,7 @@
 
     <div class="mx-auto max-w-7xl px-2 lg:px-8 mt-5">
       <h1 class="text-2xl mt-5 text-start text-red-600 font-bold mb-2">Tất cả combo</h1>
-      <p class="text-sm"> Có 3/20 combo đang áp dụng</p>
+      <p class="text-sm"> Có 3/20 combo đang chạy</p>
       <div class="inline-block min-w-full py-2 sm:px-2 lg:px-8">
         <div class="overflow-hidden">
           <table class="min-w-full text-left text-sm font-light" id="myTable">
@@ -48,7 +50,7 @@
                   <td class="whitespace-nowrap px-2 py-4 font-medium">
                     <%= index +1 %>
                   </td>
-                  <td class="whitespace-nowrap px-2 py-4">
+                  <td class="whitespace-wrap px-2 py-4">
                     <%= moment(data[index].timeCreate).format('HH:mm, DD/MM/YYYY') %>
                   </td>
                   <td class="whitespace-nowrap px-2 py-4 hidden md:table-cell">
@@ -61,28 +63,30 @@
                     <a href="/manager/combo/<%= data[index].id %>">
                       <%= data[index].name %>
                     </a>
-                    
+
                   </td>
                   <td class="whitespace-nowrap px-2 py-4 text-slate-600">
                     <%= formatPrice(data[index].price) %>
                   </td>
                   <td class="whitespace-nowrap px-2 py-4 text-violet-600">
                     <% if (data[index].active==false) { %>
-                      <p class="text-stone-500">Chưa áp dụng</p>
+                      <p class="text-red-500">Chưa chạy</p>
                       <% } else { %>
-                        <p class="text-green-500">Đang áp dụng</p>
+                        <p class="text-green-500">Đang chạy</p>
                         <% } %>
                   </td>
                   <td class="whitespace-nowrap px-2 py-4 text-violet-600 flex flex-row">
                     <% if (data[index].active==false) { %>
 
-                      <button class="btn btn-sm mr-2 rounded-lg text-green-500 text-end flex flex-row justify-end"
+                      <button onclick="active(this.id)" id="<%= data[index]._id %>"
+                        class="btn btn-sm mr-2 rounded-lg text-green-500 text-end flex flex-row justify-end"
                         title="Áp dụng">
                         <i data-feather="play" class="w-4 h-4"></i>
                       </button>
                       <% } else { %>
 
-                        <button class="btn btn-sm mr-2 rounded-lg text-stone-500 text-end flex flex-row justify-end"
+                        <button onclick="deactive(this.id)" id="<%= data[index]._id %>"
+                          class="btn btn-sm mr-2 rounded-lg text-stone-500 text-end flex flex-row justify-end"
                           title="Ngưng áp dụng">
                           <i data-feather="pause" class="w-4 h-4"></i>
                         </button>
@@ -92,7 +96,7 @@
                                 class="w-4 h-4"></i></label>
                             <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-white rounded-box w-52 z-10">
                               <li><a href="/manager/edit-combo/<%= data[index]._id %>">Sửa combo</a></li>
-                              <li><a>Xóa combo</a></li>
+                              <li><a onclick="fndelete(this.id)" id="<%= data[index]._id %>">Xóa combo</a></li>
                             </ul>
                           </div>
                   </td>
@@ -110,6 +114,75 @@
       <script>
         feather.replace()
         let table = new DataTable('#myTable');
+
+        /* active */
+        function active(comboId) {
+          if (confirm("Bạn muốn chạy combo này?") == true) {
+            //console.log(comboId);
+            axios({
+              method: 'put',
+              url: 'http://localhost:3000/manager/active-combo/',
+              data: {
+                id: comboId,
+              }
+            })
+              .then(function (res) {
+                console.log(res.data);
+                if (res.data.noiti == 'active') {
+                  alert('Chạy thành công')
+                  window.location.reload()
+                } else {
+                  alert('có lỗi, vui lòng thông báo cho IT')
+                }
+              });
+          }
+
+        }
+
+        /* deactive */
+        function deactive(comboId) {
+          if (confirm("Bạn muốn ngưng combo này?") == true) {
+            //console.log(comboId);
+            axios({
+              method: 'put',
+              url: 'http://localhost:3000/manager/deactive-combo/',
+              data: {
+                id: comboId,
+              }
+            })
+              .then(function (res) {
+                console.log(res.data);
+                if (res.data.noiti == 'deactive') {
+                  alert('Ngưng thành công')
+                  window.location.reload()
+                } else {
+                  alert('có lỗi, vui lòng thông báo cho IT')
+                }
+              });
+          }
+
+        }
+        
+        /* delete */
+        function fndelete(comboId) {
+          if (confirm("Bạn muốn xóa combo này?") == true) {
+            //console.log(comboId);
+            axios({
+              method: 'post',
+              url: 'http://localhost:3000/manager/delete-combo/'+ comboId,
+            })
+              .then(function (res) {
+                console.log(res.data);
+                if (res.data.noiti == 'deleted') {
+                  alert('Xóa thành công')
+                  window.location.reload()
+                } else {
+                  alert('có lỗi, vui lòng thông báo cho IT')
+                }
+              });
+          }
+
+        }
       </script>
 </body>
 

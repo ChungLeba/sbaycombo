@@ -27,7 +27,7 @@
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="text-sm breadcrumbs py-2 sm:px-2 lg:px-8 mt-5">
               <ul>
-                <li><a href="/manager">Combo</a></li>
+                <li><a href="/manager">Đơn combo</a></li>
                 <li>Combo chờ xử lý</li>
               </ul>
             </div>
@@ -45,6 +45,7 @@
                       <th scope="col" class="px-2 py-4">Tên Combo</th>
                       <th scope="col" class="px-2 py-4">Giá</th>
                       <th scope="col" class="px-2 py-4">Trạng thái</th>
+                      <th scope="col" class="px-2 py-4">Thao tác</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -60,6 +61,9 @@
                         <td class="whitespace-nowrap px-2 py-4 font-bold"><%= data[index].product_id[0].name %></td>
                         <td class="whitespace-nowrap px-2 py-4 font-bold"><%= formatPrice(data[index].product_id[0].price) %> VND</td>
                         <td class="whitespace-nowrap px-2 py-4 text-red-600"><%= data[index].status == 1 ? 'Chờ xử lý' : '' %></td>
+                        <td class="whitespace-nowrap px-2 py-4 ">
+                          <a href="/manager/order/" class="btn btn-sm btn-outline btn-success mr-2">Xử lý</a>
+                        </td>
                       </tr>
                       <% } %>
                   </tbody>

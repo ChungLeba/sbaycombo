@@ -51,6 +51,7 @@ let createCombo = async(req, res) => {
             timeCombo: req.body.timeCombo,
             priceType: req.body.priceType,
             price: req.body.price,
+            priceChild:req.body.priceChild,
             description: req.body.description,
             images: imageUploads
         })
@@ -134,12 +135,51 @@ let updateCombo = async (req, res) => {
         console.log(error);
     }
 }
-
+/* Active */
+let activeCombo = async (req, res) => {
+    try {
+        
+        await comboModel.findByIdAndUpdate(
+            req.body.id,
+            {
+                active:true
+            },
+            {new: true})
+            .then(product => {
+                res.json({noiti: 'active'})
+            })
+            .catch(err => {
+                res.status(500).send(err);
+            })
+    } catch (error) {
+        console.log(error);
+    }
+}
+/* Deactive */
+let deactiveCombo = async (req, res) => {
+    try {
+        
+        await comboModel.findByIdAndUpdate(
+            req.body.id,
+            {
+                active:false
+            },
+            {new: true})
+            .then(product => {
+                res.json({noiti: 'deactive'})
+            })
+            .catch(err => {
+                res.status(500).send(err);
+            })
+    } catch (error) {
+        console.log(error);
+    }
+}
 // Delete product
 let deleteCombo = async (req, res) => {
     try {
         await comboModel.findByIdAndDelete(req.params.id);
-        res.redirect("/manager");
+        res.json({noiti:'deleted'});
     } catch (error) {
         console.log("error", error);
         res.status(500).send("There was a problem deleting the product.");
@@ -153,5 +193,7 @@ module.exports = {
     readToViewCombo:readToViewCombo,
     readToUpdateCombo: readToUpdateCombo,
     updateCombo: updateCombo,
+    activeCombo:activeCombo,
+    deactiveCombo:deactiveCombo,
     deleteCombo: deleteCombo
 };

@@ -14,9 +14,13 @@ const userSchema = new mongoose.Schema({
     userEmail: String,
     userName: String,
     userPhone: String,
+    userSalt: String,
     userHash: String,
-    userLevel: Number,
-    userActive: Boolean,
+    userLevel: Number, //1: Admin, 2: Manager, 3: Employee
+    userActive: {
+        type: Boolean,
+        default: false
+    },
     timeCreate: Date,
     timeUpdate: Date,
     timelastlogin: Date,
