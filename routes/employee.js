@@ -7,8 +7,8 @@ const orderComboController = require('../controllers/employee/orderCombo.control
 
 // Authorization url employee
 const checkLoginEmployee = (req, res, next) => {
-  if (req.cookies.SbayComboEtoken) {
-    var decoded = jwt.verify(req.cookies.SbayComboEtoken, process.env.CookiesSecretKey);
+  if (req.cookies.SbayComboToken) {
+    var decoded = jwt.verify(req.cookies.SbayComboToken, process.env.CookiesSecretKey);
     console.log(decoded.userLevel);
     if (decoded.userID && decoded.userLevel == 3) {
       req.decoded = decoded;

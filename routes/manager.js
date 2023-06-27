@@ -21,10 +21,10 @@ const upload = multer({ storage: storage });
 
 // Authorization url manager
 const checkLoginManager = (req, res, next) => {
-  if (req.cookies.SbayComboEtoken) {
-    var decoded = jwt.verify(req.cookies.SbayComboEtoken, process.env.CookiesSecretKey);
+  if (req.cookies.SbayComboToken) {
+    var decoded = jwt.verify(req.cookies.SbayComboToken, process.env.CookiesSecretKey);
     console.log(decoded.userLevel);
-    if (decoded.userID && decoded.userLevel == 1) {
+    if (decoded.userID && decoded.userLevel == 2) {
       req.decoded = decoded;
       //console.log(req.decoded);
       next();
@@ -50,6 +50,12 @@ router.get('/quan-ly-combo', checkLoginManager, comboController.getAllCombo);
 
 /* GET users listing. */
 router.get('/quan-ly-nhan-vien', checkLoginManager, managerController.findAllEmployee);
+
+/* PUT users listing. */
+router.put('/quan-ly-nhan-vien', checkLoginManager, managerController.activeEmployee);
+
+/* Delete users listing. */
+router.delete('/quan-ly-nhan-vien', checkLoginManager, managerController.deleteEmployee);
 /* GET users listing. */
 router.get('/add-combo', function(req, res, next) {
   res.render('./manager/m-add-combo')

@@ -73,9 +73,17 @@ let loginUser = async (req, res) => {
             console.log(checkHash);
             if (checkHash) {
                 console.log('checkHash', checkHash);
-                var token = jwt.sign({ userID: checkHash._id, userLevel: checkHash.userLevel, userName: checkHash.userName }, process.env.CookiesSecretKey);
-                res.cookie('SbayComboEtoken', token)
-                res.json({ 'noiti': 'Đăng nhập thành công' })
+                var token = jwt.sign({ 
+                    userID: checkHash._id,
+                    userName: checkHash.userName,
+                    userLevel: checkHash.userLevel }, process.env.CookiesSecretKey);
+                res.cookie('SbayComboToken', token)
+                if(checkHash.userLevel == 3){
+                    res.json({ 'noiti': 'Employee login ok' })
+                } else if(checkHash.userLevel == 2){
+                    res.json({ 'noiti': 'Manager login ok' })
+                }
+                
                 //res.end('Dang nhap thanh cong')
             } else {
                 res.json({ 'noiti': 'Sai mat khau' })

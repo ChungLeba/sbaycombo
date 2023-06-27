@@ -107,7 +107,9 @@
           } else if(res.data.noiti == 'success') {
             alert('Chúc mừng bạn đã đăng ký thành công !')
             window.location.href = ("/tai-khoan-doi-duyet")
-          } 
+          }  else if(res.data.noiti == "Found") {
+            alert('Số điện thoại đã tồn tại, vui lòng sử dụng số điện thoại khác !')
+          }
         });
       }
       
