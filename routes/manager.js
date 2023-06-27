@@ -63,18 +63,18 @@ router.get('/add-combo', function(req, res, next) {
 /* GET combos listing. */
 router.get('/', checkLoginManager, comboController.getActiveCombo);
 /* POST add new combo */
-router.post('/new-add-combo', upload.array('images', 20), comboController.createCombo);
+router.post('/new-add-combo', checkLoginManager, upload.array('images', 20), comboController.createCombo);
 /* GET edit combo */
-router.get('/edit-combo/:id', comboController.readToUpdateCombo);
+router.get('/edit-combo/:id', checkLoginManager, comboController.readToUpdateCombo);
 /* POST update combo */
-router.post('/update-combo/:id', upload.array('images', 20), comboController.updateCombo);
+router.post('/update-combo/:id', checkLoginManager, upload.array('images', 20), comboController.updateCombo);
 /* DELETE detele combo */
-router.post('/delete-combo/:id', comboController.deleteCombo);
+router.post('/delete-combo/:id', checkLoginManager, comboController.deleteCombo);
 /* Read 1 combo */
-router.get('/combo/:id', comboController.readToViewCombo);
+router.get('/combo/:id', checkLoginManager, comboController.readToViewCombo);
 /* Active combo */
-router.put('/active-combo', comboController.activeCombo);
+router.put('/active-combo', checkLoginManager, comboController.activeCombo);
 /* deactive combo */
-router.put('/deactive-combo', comboController.deactiveCombo);
+router.put('/deactive-combo', checkLoginManager, comboController.deactiveCombo);
 
 module.exports = router;
