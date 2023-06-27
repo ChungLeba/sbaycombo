@@ -32,7 +32,10 @@ let oneOrderComboWait = async(req, res) => {
 
         getItems().then(function(FoundItems) {
             console.log(FoundItems);
-            res.render('./employee/e-ordercombo-todo', {order: FoundItems});
+            res.render('./employee/e-ordercombo-todo', {
+                order: FoundItems,
+                decoded: req.decoded
+            });
         });
     } catch (error) {
         console.log(error);
@@ -52,7 +55,10 @@ let oneOrderComboProcessing = async(req, res) => {
 
         getItems().then(function(FoundItems) {
             // console.log(FoundItems);
-            res.render('./employee/e-ordercombo-todo-processing', {order: FoundItems});
+            res.render('./employee/e-ordercombo-todo-processing', {
+                order: FoundItems,
+                decoded: req.decoded
+            });
         });
     } catch (error) {
         console.log(error);
@@ -72,7 +78,10 @@ let oneOrderComboComplete = async(req, res) => {
 
         getItems().then(function(FoundItems) {
             // console.log(FoundItems);
-            res.render('./employee/e-ordercombo-todo-complete', {order: FoundItems});
+            res.render('./employee/e-ordercombo-todo-complete', {
+                order: FoundItems,
+                decoded: req.decoded
+            });
         });
     } catch (error) {
         console.log(error);
@@ -92,7 +101,10 @@ let oneOrderComboCancel = async(req, res) => {
 
         getItems().then(function(FoundItems) {
             // console.log(FoundItems);
-            res.render('./employee/e-ordercombo-todo-cancel', {order: FoundItems});
+            res.render('./employee/e-ordercombo-todo-cancel', {
+                order: FoundItems,
+                decoded: req.decoded
+            });
         });
     } catch (error) {
         console.log(error);

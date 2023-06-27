@@ -59,21 +59,21 @@ let loginUser = async (req, res) => {
                     userPhone: req.body.userPhone,
 
                 })
-        // console.log('findAcc: ', findAcc);
+        console.log('findAcc: ', findAcc);
         if (findAcc == null) {
             res.json({ 'noiti': 'Số điện thoại chưa đăng ký' })
-        } else if (findAcc.userLevel) {
+        } else if (findAcc.userLevel && findAcc.userPhone === req.body.userPhone) {
             // Hashing calculato,
             const hash = crypto.pbkdf2Sync(req.body.password, findAcc.userSalt,
                 1000, 64, `sha512`).toString(`hex`);
 
             /* Check Hash */
-            const checkHash = await userModel.findOne({userHash: hash});
+            const checkHash = await userModel.findOne({userHash: hash, userPhone: findAcc.userPhone});
             
             console.log(checkHash);
             if (checkHash) {
                 console.log('checkHash', checkHash);
-                var token = jwt.sign({ userID: checkHash._id, userLevel: checkHash.userLevel }, process.env.CookiesSecretKey);
+                var token = jwt.sign({ userID: checkHash._id, userLevel: checkHash.userLevel, userName: checkHash.userName }, process.env.CookiesSecretKey);
                 res.cookie('SbayComboEtoken', token)
                 res.json({ 'noiti': 'Đăng nhập thành công' })
                 //res.end('Dang nhap thanh cong')

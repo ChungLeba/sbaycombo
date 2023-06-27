@@ -186,7 +186,7 @@
                 </table>
               </div>
               <!-- xu ly -->
-              <div class="flex flex-row mt-5">
+              <!-- <div class="flex flex-row mt-5">
                 <i data-feather="user-check" class="w-4 h-4 mr-2 mt-1"></i>
                 <h2 class="font-bold">Nhân viên xử lý</h2>
 
@@ -198,9 +198,10 @@
                   <strong class="text-xl text-orange-600">Trần Ngọc Ánh</strong>
                   <span class="text-sm">Nhân viên kinh doanh</span>
                 </div>
-              </div>
+              </div> -->
 
               <!-- Step -->
+              <input type="hidden" id="hiddenUserID" value="<%= decoded.userID %>">
               <div class="flex flex-row mt-5">
                 <i data-feather="file-text" class="w-4 h-4 mr-2 mt-1"></i>
                 <h2 class="font-bold">Tiến trình xử lý</h2>
@@ -240,7 +241,7 @@
   <script>
     function confirm() {
       const value = document.getElementById('todostatus').value;
-      const user_id = '6493ea60ed7bdf2f37c15dc7';
+      const user_id = document.getElementById('hiddenUserID').value;
       const e1 = document.getElementById("btnConfirm");
       const orderId = e1.getAttribute("orderId");
       axios({
