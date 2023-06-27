@@ -13,6 +13,7 @@ let updateSatusOrderCombo = async (req, res) => {
                 timeCreateEmployee: Date.now(),
                 timeUpdateEmployee: Date.now()
             });
+            console.log(OrderComboEmptyDateEmployee);
             res.json({data: OrderComboEmptyDateEmployee});
         } else {
             const OrderComboNotEmptyDateEmployee = await orderComboModel.findByIdAndUpdate(req.params.id, {

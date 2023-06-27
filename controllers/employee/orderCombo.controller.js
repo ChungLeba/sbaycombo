@@ -31,7 +31,7 @@ let oneOrderComboWait = async(req, res) => {
         }
 
         getItems().then(function(FoundItems) {
-            console.log(FoundItems);
+            // console.log(FoundItems);
             res.render('./employee/e-ordercombo-todo', {
                 order: FoundItems,
                 decoded: req.decoded
