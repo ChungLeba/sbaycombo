@@ -17,6 +17,7 @@ router.get('/dang-ky', function(req, res, next) {
 
 router.post('/dang-ky', userController.createUser);
 
+router.post('/dang-nhap', userController.loginUser);
 
 router.get('/quen-mat-khau', function(req, res, next) {
   res.render('recovery_pass');

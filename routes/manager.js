@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
 const multer = require('multer');
-const comboController = require('../controllers/combo.controller');
-const orderComboController = require('../controllers/orderCombo.controller');
-const managerController = require('../controllers/manager.controller');
+const comboController = require('../controllers/manager/combo.controller');
+const orderComboController = require('../controllers/manager/orderCombo.controller');
+const managerController = require('../controllers/manager/manager.controller');
+const userController = require('../controllers/user.controller');
+var jwt = require('jsonwebtoken');
 
 // upload image multer
 const storage = multer.diskStorage({
@@ -17,40 +19,42 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-/* GET users listing. */
-router.get('/quan-ly-combo-cho-xu-ly', orderComboController.getAllCustomer);
-/* GET users listing. */
-router.get('/quan-ly-combo-dang-xu-ly', function(req, res, next) {
-  res.render('./manager/m-combo-processing')
-});
-/* GET users listing. */
-router.get('/quan-ly-combo-hoan-thanh', function(req, res, next) {
-  res.render('./manager/m-combo-complete')
-});
-/* GET users listing. */
-router.get('/quan-ly-combo-huy', function(req, res, next) {
-  res.render('./manager/m-combo-cancel')
-});
+// Authorization url manager
+const checkLoginManager = (req, res, next) => {
+  if (req.cookies.SbayComboEtoken) {
+    var decoded = jwt.verify(req.cookies.SbayComboEtoken, process.env.CookiesSecretKey);
+    console.log(decoded.userLevel);
+    if (decoded.userID && decoded.userLevel == 1) {
+      req.decoded = decoded;
+      next();
+    } else {
+      res.redirect('/');
+    }
+  } else {
+    console.log("user does not have permission");
+  }
+}
 
-/* GET 1 orderCombo */
-router.get('/orderCombo/:id', orderComboController.oneOrderCombo);
+/* GET users listing. */
+router.get('/quan-ly-combo-cho-xu-ly', checkLoginManager, orderComboController.getAllCustomer);
+/* GET users listing. */
+router.get('/quan-ly-combo-dang-xu-ly', checkLoginManager, managerController.getAllComboProcessing);
+/* GET users listing. */
+router.get('/quan-ly-combo-hoan-thanh', checkLoginManager, managerController.getAllComboComplete);
+/* GET users listing. */
+router.get('/quan-ly-combo-huy', checkLoginManager, managerController.getAllComboCancel);
 
 /* GET Quản lý combo. */
-router.get('/quan-ly-combo', comboController.getAllCombo);
+router.get('/quan-ly-combo', checkLoginManager, comboController.getAllCombo);
 
 /* GET users listing. */
-router.get('/quan-ly-nhan-vien', managerController.findAllEmployee);
-/* Put Active User */
-router.put('/employee', managerController.activeEmployee);
-/* Delete User */
-router.delete('/employee', managerController.deleteEmployee);
-
+router.get('/quan-ly-nhan-vien', checkLoginManager, managerController.findAllEmployee);
 /* GET users listing. */
 router.get('/add-combo', function(req, res, next) {
   res.render('./manager/m-add-combo')
 });
 /* GET combos listing. */
-router.get('/', comboController.getActiveCombo);
+router.get('/', checkLoginManager, comboController.getActiveCombo);
 /* POST add new combo */
 router.post('/new-add-combo', upload.array('images', 20), comboController.createCombo);
 /* GET edit combo */

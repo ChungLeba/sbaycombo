@@ -9,8 +9,9 @@ let getActiveCombo = async(req, res) => {
             });
             return Items;
           }
-
+        
         getItems().then(function(FoundItems){
+            //console.log(FoundItems);
             res.render('./manager/m-dashboard', {data: FoundItems})
         });
     } catch (error) {
