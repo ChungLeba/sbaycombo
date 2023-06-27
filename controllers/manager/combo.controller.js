@@ -1,4 +1,4 @@
-var comboModel = require('../models/combo.model');
+var comboModel = require('../../models/combo.model');
 
 // Get active combo
 let getActiveCombo = async(req, res) => {
@@ -18,7 +18,7 @@ let getActiveCombo = async(req, res) => {
     }
 };
 
-// Get active combo
+// Get all combo
 let getAllCombo = async(req, res) => {
     try {
         async function getItems() {

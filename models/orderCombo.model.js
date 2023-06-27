@@ -20,8 +20,14 @@ const customerProductSchema = new mongoose.Schema({
     timeUpdate: {
         type: Date,
         default: Date.now()
+    },
+    user_id: [{ type: Schema.Types.ObjectId, ref: 'userModel' }], //ref tới model user
+    timeCreateEmployee: {
+        type: Date
+    },
+    timeUpdateEmployee: {
+        type: Date
     }
-
 },
 {collection: 'orderCombo'}
 )

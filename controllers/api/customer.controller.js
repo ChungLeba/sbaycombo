@@ -20,7 +20,9 @@ let createCustomer = async(req, res) => {
             orderComboModel.create({
                 customer_id: data._id,
                 product_id: req.body.productId,
-                status: 1
+                user_id: null,
+                timeCreateEmployee: null,
+                timeUpdateEmployee: null
             })
         })
         .catch(err => {
