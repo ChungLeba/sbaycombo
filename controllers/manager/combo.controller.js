@@ -34,7 +34,10 @@ let getAllCombo = async(req, res) => {
           }
         getItems().then(function(FoundItems){
             //console.log(FoundItems);
-            res.render('./manager/m-allCombos.ejs', {data: FoundItems})
+            res.render('./manager/m-allCombos.ejs', {
+                data: FoundItems,
+                decoded: req.decoded
+            })
         });
     } catch (error) {
         console.log(error);

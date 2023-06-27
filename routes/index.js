@@ -29,6 +29,7 @@ router.get('/thay-doi-thong-tin', function(req, res, next) {
   res.render('profile-edit');
 });
 router.get('/logout', function(req, res, next) {
+  res.clearCookie('SbayComboToken');
   res.redirect('/')
 });
 /* GET home tong quan. */

@@ -77,7 +77,7 @@ let loginUser = async (req, res) => {
                     userID: checkHash._id,
                     userName: checkHash.userName,
                     userLevel: checkHash.userLevel }, process.env.CookiesSecretKey);
-                res.cookie('SbayComboEtoken', token)
+                res.cookie('SbayComboToken', token)
                 if(checkHash.userLevel == 3){
                     res.json({ 'noiti': 'Employee login ok' })
                 } else if(checkHash.userLevel == 2){

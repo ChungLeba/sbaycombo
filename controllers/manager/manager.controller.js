@@ -36,7 +36,10 @@ let getAllComboProcessing = async(req, res) => {
 
         getItems().then(function(FoundItems) {
             // res.send({data: FoundItems});
-            res.render('./manager/m-combo-processing', {data: FoundItems});
+            res.render('./manager/m-combo-processing', {
+                data: FoundItems,
+                decoded: req.decoded
+            });
         });
     } catch (error) {
         console.log(error);
@@ -56,7 +59,10 @@ let getAllComboComplete = async(req, res) => {
         }
 
         getItems().then(function(FoundItems) {
-            res.render('./manager/m-combo-complete', {data: FoundItems});
+            res.render('./manager/m-combo-complete', {
+                data: FoundItems,
+                decoded: req.decoded
+            });
         });
     } catch (error) {
         console.log(error);
@@ -76,7 +82,10 @@ let getAllComboCancel = async(req, res) => {
         }
 
         getItems().then(function(FoundItems) {
-            res.render('./manager/m-combo-cancel', {data: FoundItems});
+            res.render('./manager/m-combo-cancel', {
+                data: FoundItems,
+                decoded: req.decoded
+            });
         });
     } catch (error) {
         console.log(error);
