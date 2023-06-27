@@ -31,139 +31,134 @@
         <% var totalPriceComplete=0; var totalPriceCancel=0; var totalPriceAll=0; %>
           <% for( let index=0; index < comboActivity.length; index++ ) { %>
             <% totalPriceAll=totalPriceAll + comboActivity[index].TotalPrice %>
-            <% if (comboActivity[index].status=='complete' ) { %>
-              <% totalPriceComplete=totalPriceComplete + comboActivity[index].TotalPrice %>
-                <% } %>
-                <% if (comboActivity[index].status=='cancel' ) { %>
-                  <% totalPriceCancel=totalPriceCancel + comboActivity[index].TotalPrice %>
-                    <% } %>
-              <% } %>
-                <div>
-                  <div class="flex flex-wrap animate__animated animate__pulse">
-                    <a href="/manager/quan-ly-combo-cho-xu-ly" class="w-full lg:w-6/12 xl:w-3/12 px-4">
-                      <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-                        <div class="flex-auto p-4">
-                          <div class="flex flex-wrap">
-                            <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                              <h5 class="text-blueGray-400 uppercase font-bold text-xs">Đơn Combo chờ</h5><span
-                                class="font-semibold text-xl text-red-700">44</span>
-                            </div>
-                            <div class="relative w-auto pl-4 flex-initial">
-                              <div
-                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-red-500">
-                                <i data-feather="zap"></i>
+              <% if (comboActivity[index].status=='complete' ) { %>
+                <% totalPriceComplete=totalPriceComplete + comboActivity[index].TotalPrice %>
+                  <% } %>
+                    <% if (comboActivity[index].status=='cancel' ) { %>
+                      <% totalPriceCancel=totalPriceCancel + comboActivity[index].TotalPrice %>
+                        <% } %>
+                          <% } %>
+                            <div>
+                              <div class="flex flex-wrap animate__animated animate__pulse">
+                                <a href="/manager/quan-ly-combo-cho-xu-ly" class="w-full lg:w-6/12 xl:w-3/12 px-4">
+                                  <div
+                                    class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+                                    <div class="flex-auto p-4">
+                                      <div class="flex flex-wrap">
+                                        <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
+                                          <h5 class="text-blueGray-400 uppercase font-bold text-xs">Đơn Combo chờ</h5>
+                                          <span class="font-semibold text-xl text-red-700">44</span>
+                                        </div>
+                                        <div class="relative w-auto pl-4 flex-initial">
+                                          <div
+                                            class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-red-500">
+                                            <i data-feather="zap"></i>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </a>
+                                <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+                                  <div
+                                    class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+                                    <div class="flex-auto p-4">
+                                      <div class="flex flex-wrap">
+                                        <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
+                                          <h5 class="text-blueGray-400 uppercase font-bold text-xs">Đơn Hot deals chờ
+                                          </h5><span class="font-semibold text-xl text-orange-700">###</span>
+                                        </div>
+                                        <div class="relative w-auto pl-4 flex-initial">
+                                          <div
+                                            class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-orange-500">
+                                            <i data-feather="award"></i>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+                                  <div
+                                    class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+                                    <div class="flex-auto p-4">
+                                      <div class="flex flex-wrap">
+                                        <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
+                                          <h5 class="text-blueGray-400 uppercase font-bold text-xs"
+                                            title="Tính dựa trên tổng các đơn hàng chờ + các đơn hàng đang thực hiện ">
+                                            Tiền chờ xử lý</h5><span class="font-semibold text-xl text-blueGray-700"
+                                            title="Tính dựa trên tổng đơn hàng đã hoàn thành ">
+                                            <%= (totalPriceAll - totalPriceComplete - totalPriceCancel)/1000000 %> triệu
+                                              đ
+                                          </span>
+                                        </div>
+                                        <div class="relative w-auto pl-4 flex-initial">
+                                          <div
+                                            class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-pink-500">
+                                            <i data-feather="dollar-sign"></i>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+                                  <div
+                                    class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+                                    <div class="flex-auto p-4">
+                                      <div class="flex flex-wrap">
+                                        <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
+                                          <h5 class="text-blueGray-400 uppercase font-bold text-xs">Doanh thu ghi nhận
+                                          </h5><span class="font-semibold text-xl text-blueGray-700">
+                                            <%= totalPriceComplete/1000000 %> triệu đ
+                                          </span>
+                                        </div>
+                                        <div class="relative w-auto pl-4 flex-initial">
+                                          <div
+                                            class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-green-500">
+                                            <i data-feather="dollar-sign"></i>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                    <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-                      <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-                        <div class="flex-auto p-4">
-                          <div class="flex flex-wrap">
-                            <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                              <h5 class="text-blueGray-400 uppercase font-bold text-xs">Đơn Hot deals chờ</h5><span
-                                class="font-semibold text-xl text-orange-700">###</span>
-                            </div>
-                            <div class="relative w-auto pl-4 flex-initial">
-                              <div
-                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-orange-500">
-                                <i data-feather="award"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-                      <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-                        <div class="flex-auto p-4">
-                          <div class="flex flex-wrap">
-                            <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                              <h5 class="text-blueGray-400 uppercase font-bold text-xs" title="Tính dựa trên tổng các đơn hàng chờ + các đơn hàng đang thực hiện ">Tiền chờ xử lý</h5><span
-                                class="font-semibold text-xl text-blueGray-700" title="Tính dựa trên tổng đơn hàng đã hoàn thành "><%= (totalPriceAll - totalPriceComplete - totalPriceCancel)/1000000 %> triệu đ</span>
-                            </div>
-                            <div class="relative w-auto pl-4 flex-initial">
-                              <div
-                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-pink-500">
-                                <i data-feather="dollar-sign"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-                      <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-                        <div class="flex-auto p-4">
-                          <div class="flex flex-wrap">
-                            <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                              <h5 class="text-blueGray-400 uppercase font-bold text-xs">Doanh thu ghi nhận</h5><span
-                                class="font-semibold text-xl text-blueGray-700"><%= totalPriceComplete/1000000 %> triệu đ</span>
-                            </div>
-                            <div class="relative w-auto pl-4 flex-initial">
-                              <div
-                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-green-500">
-                                <i data-feather="dollar-sign"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
-                  <p class="text-start my-3 font-bold text-red-600">Hoạt động mới nhất</p>
-                  <div class="overflow-x-auto">
-                    <table class="table">
-                      <!-- <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Thời gian</th>
-                  <th>Nhân viên</th>
-                  <th>Trạng thái</th>
-                  <th></th>
-                </tr>
-              </thead> -->
-                      <tbody>
-                        <!-- row 1 -->
-                          <% for( let index=0; index < 5; index++ ) { %>
+                              <p class="text-start my-3 font-bold text-red-600">Hoạt động mới nhất</p>
+                              <div class="overflow-x-auto">
+                                <table class="table">
 
-                              
+                                  <% for( let index=0; index < dataLogs.length; index++ ) { %>
                                     <tr>
                                       <th>
                                         <%= index +1 %>
                                       </th>
-                                      <td class="mr-1 ">
-                                        <%= moment(comboActivity[index].timeUpdate).fromNow() %>
+                                      <td class="font-bold mr-1 text-violet-600">
+                                        <%= moment(dataLogs[index].timeCreate).fromNow() %>
                                       </td>
                                       <td class="font-bold mr-1 text-violet-600">
-                                        <%= comboActivity[index].user_id[0].userName %>
+                                        <%= dataLogs[index].employeeName %>
+                                      </td>
+                                      <td class=" font-semibold">
+                                        <%= dataLogs[index].customerName %>
+                                      </td>
+                                      <td class=" font-semibold">
+                                        <%= formatPrice(dataLogs[index].price) %>đ
                                       </td>
                                       <td class=" mr-1">
-                                        <% if (comboActivity[index].status=='wait' ) { %>
-                                          <p class="text-red-600">Chờ xử lý</p>
-                                          <% } else if (comboActivity[index].status=='processing' ) { %>
-                                            <p class="text-green-600">Đang xử lý</p>
-                                            <% } else if (comboActivity[index].status=='complete' ) { %>
-                                              <p class="text-blue-600">Hoàn thành</p>
-                                              <% } else if (comboActivity[index].status=='cancel' ) { %>
-                                                <p class="text-slate-600">Hủy</p>
-                                                <% } %>
-                                      </td>
-                                      <td class=" mr-1 text-end">
-                                        <button class="btn btn-sm btn-ghost text-red-600"> xem</button>
+                                        <%= dataLogs[index].subject %>
                                       </td>
                                     </tr>
                                     <% } %>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+
+
+                                      </tbody>
+                                </table>
+                              </div>
+                            </div>
       </div>
       <p class="text-start my-3 font-bold text-red-600">Các bombo đang áp dụng
-          %>
       </p>
       <div class=" px-2 lg:overflow-visible lg:px-0">
         <div class="mx-auto max-w-7xl">

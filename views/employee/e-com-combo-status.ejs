@@ -1,6 +1,6 @@
 <div class="flex flex-row justify-end py-2 sm:px-6 lg:px-8">
-  <a href="/employee/quan-ly-combo" class=" mb-2 p-2 rounded-lg bg-red-600 text-white mr-2">Combo chờ xử lý (44)</a>
-  <a href="/employee/quan-ly-combo-dang-xu-ly" class=" mb-2 p-2 rounded-lg bg-green-600 text-white mr-2">Combo đang xử lý (3/3)</a>
-  <a href="/employee/quan-ly-combo-hoan-thanh" class=" mb-2 p-2 rounded-lg bg-blue-600 text-white mr-2">Combo hoàn thành (300)</a>
-  <a href="/employee/quan-ly-combo-huy" class=" mb-2 p-2 rounded-lg bg-slate-300 mr-2">Combo hủy (2)</a>
+  <a href="/employee/quan-ly-combo" class=" mb-2 p-2 rounded-lg bg-red-600 text-white mr-2">Combo chờ xử lý (<%= countWait %>)</a>
+  <a href="/employee/quan-ly-combo-dang-xu-ly" class=" mb-2 p-2 rounded-lg bg-green-600 text-white mr-2">Combo đang xử lý (<%= countProcessing %>)</a>
+  <a href="/employee/quan-ly-combo-hoan-thanh" class=" mb-2 p-2 rounded-lg bg-blue-600 text-white mr-2">Combo hoàn thành (<%= countComplete %>)</a>
+  <a href="/employee/quan-ly-combo-huy" class=" mb-2 p-2 rounded-lg bg-slate-300 mr-2">Combo hủy (<%= countCancel %>)</a>
 </div>

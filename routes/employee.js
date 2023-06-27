@@ -4,6 +4,8 @@ var userModel = require('../models/user.model.js');
 var jwt = require('jsonwebtoken');
 const employeeController = require('../controllers/employee/employee.controller.js');
 const orderComboController = require('../controllers/employee/orderCombo.controller.js');
+var orderComboModel = require('../models/orderCombo.model.js');
+const comboController = require('../controllers/employee/combo.controller.js');
 
 // Authorization url employee
 const checkLoginEmployee = (req, res, next) => {
@@ -22,9 +24,7 @@ const checkLoginEmployee = (req, res, next) => {
 }
 
 /* GET employee dashboard. */
-router.get('/', checkLoginEmployee, function (req, res, next) {
-  res.render('./employee/e-dashboard', { decoded: req.decoded })
-});
+router.get('/', checkLoginEmployee, comboController.getAllCombo);
 /* GET users listing. */
 router.get('/quan-ly-combo', checkLoginEmployee, employeeController.getAllComboWait);
 /* GET users listing. */

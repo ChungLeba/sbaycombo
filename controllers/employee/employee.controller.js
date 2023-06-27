@@ -11,10 +11,19 @@ let getAllComboWait = async(req, res) => {
             return Items;
         }
 
+        const countItemWait = await orderComboModel.count({status: 'wait'})
+        const countItemProcessing = await orderComboModel.count({status: 'processing', user_id: req.decoded.userID})
+        const countItemComplete = await orderComboModel.count({status: 'complete', user_id: req.decoded.userID})
+        const countItemCancel = await orderComboModel.count({status: 'cancel', user_id: req.decoded.userID})
+
         getItems().then(function(FoundItems) {
             res.render('./employee/e-combo-wait', {
                 data: FoundItems,
-                decoded: req.decoded
+                decoded: req.decoded,
+                countWait: countItemWait,
+                countProcessing: countItemProcessing,
+                countComplete: countItemComplete,
+                countCancel: countItemCancel,
             });
         });
     } catch (error) {
@@ -26,7 +35,7 @@ let getAllComboWait = async(req, res) => {
 let getAllComboProcessing = async(req, res) => {
     try {
         async function getItems() {
-            const Items = await orderComboModel.find({status: 'processing'})
+            const Items = await orderComboModel.find({status: 'processing', user_id: req.decoded.userID})
             .populate('product_id') // populate tại trường nào
             .populate('customer_id')
             .populate('user_id')
@@ -34,10 +43,19 @@ let getAllComboProcessing = async(req, res) => {
             return Items;
         }
 
+        const countItemWait = await orderComboModel.count({status: 'wait'})
+        const countItemProcessing = await orderComboModel.count({status: 'processing', user_id: req.decoded.userID})
+        const countItemComplete = await orderComboModel.count({status: 'complete', user_id: req.decoded.userID})
+        const countItemCancel = await orderComboModel.count({status: 'cancel', user_id: req.decoded.userID})
+
         getItems().then(function(FoundItems) {
             res.render('./employee/e-combo-processing', {
                 data: FoundItems,
-                decoded: req.decoded
+                decoded: req.decoded,
+                countWait: countItemWait,
+                countProcessing: countItemProcessing,
+                countComplete: countItemComplete,
+                countCancel: countItemCancel,
             });
         });
     } catch (error) {
@@ -49,7 +67,7 @@ let getAllComboProcessing = async(req, res) => {
 let getAllComboComplete = async(req, res) => {
     try {
         async function getItems() {
-            const Items = await orderComboModel.find({status: 'complete'})
+            const Items = await orderComboModel.find({status: 'complete', user_id: req.decoded.userID})
             .populate('product_id') // populate tại trường nào
             .populate('customer_id')
             .populate('user_id')
@@ -57,10 +75,19 @@ let getAllComboComplete = async(req, res) => {
             return Items;
         }
 
+        const countItemWait = await orderComboModel.count({status: 'wait'})
+        const countItemProcessing = await orderComboModel.count({status: 'processing', user_id: req.decoded.userID})
+        const countItemComplete = await orderComboModel.count({status: 'complete', user_id: req.decoded.userID})
+        const countItemCancel = await orderComboModel.count({status: 'cancel', user_id: req.decoded.userID})
+
         getItems().then(function(FoundItems) {
             res.render('./employee/e-combo-complete', {
                 data: FoundItems,
-                decoded: req.decoded
+                decoded: req.decoded,
+                countWait: countItemWait,
+                countProcessing: countItemProcessing,
+                countComplete: countItemComplete,
+                countCancel: countItemCancel,
             });
         });
     } catch (error) {
@@ -72,7 +99,7 @@ let getAllComboComplete = async(req, res) => {
 let getAllComboCancel = async(req, res) => {
     try {
         async function getItems() {
-            const Items = await orderComboModel.find({status: 'cancel'})
+            const Items = await orderComboModel.find({status: 'cancel', user_id: req.decoded.userID})
             .populate('product_id') // populate tại trường nào
             .populate('customer_id')
             .populate('user_id')
@@ -80,10 +107,19 @@ let getAllComboCancel = async(req, res) => {
             return Items;
         }
 
+        const countItemWait = await orderComboModel.count({status: 'wait'})
+        const countItemProcessing = await orderComboModel.count({status: 'processing', user_id: req.decoded.userID})
+        const countItemComplete = await orderComboModel.count({status: 'complete', user_id: req.decoded.userID})
+        const countItemCancel = await orderComboModel.count({status: 'cancel', user_id: req.decoded.userID})
+
         getItems().then(function(FoundItems) {
             res.render('./employee/e-combo-cancel', {
                 data: FoundItems,
-                decoded: req.decoded
+                decoded: req.decoded,
+                countWait: countItemWait,
+                countProcessing: countItemProcessing,
+                countComplete: countItemComplete,
+                countCancel: countItemCancel,
             });
         });
     } catch (error) {

@@ -1,6 +1,7 @@
 var comboModel = require('../../models/combo.model');
 var orderComboModel = require('../../models/orderCombo.model');
 
+var logActionEmployeeModel = require('../../models/logActionEmployee.model');
 // Get active combo
 let getActiveCombo = async (req, res) => {
     //console.log('abc:'+ req.decoded.userID);
@@ -10,8 +11,13 @@ let getActiveCombo = async (req, res) => {
         var last30day = new Date(new Date().setDate(today.getDate() - 30));
 
         const comboActive = await comboModel.find({
-            active: true
-        });
+            active: true })
+
+       
+        
+        const dataLogs = await logActionEmployeeModel.find({}).sort({'timeCreate': 'desc'}).limit(5);
+        
+        
         
         const comboActivity = await orderComboModel.find({
             timeCreate: {
@@ -28,7 +34,9 @@ let getActiveCombo = async (req, res) => {
         res.render('./manager/m-dashboard', {
             data: comboActive,
             decoded: req.decoded,
-            comboActivity: comboActivity
+            dataLogs: dataLogs,
+            comboActivity: comboActivity,
+
         })
 
     } catch (error) {
