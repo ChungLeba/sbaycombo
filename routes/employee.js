@@ -4,6 +4,7 @@ var userModel = require('../models/user.model.js');
 var jwt = require('jsonwebtoken');
 const employeeController = require('../controllers/employee/employee.controller.js');
 const orderComboController = require('../controllers/employee/orderCombo.controller.js');
+var orderComboModel = require('../models/orderCombo.model.js');
 
 // Authorization url employee
 const checkLoginEmployee = (req, res, next) => {
@@ -22,8 +23,18 @@ const checkLoginEmployee = (req, res, next) => {
 }
 
 /* GET employee dashboard. */
-router.get('/', checkLoginEmployee, function (req, res, next) {
-  res.render('./employee/e-dashboard', { decoded: req.decoded })
+router.get('/', checkLoginEmployee, async function (req, res, next) {
+  const countItemWait = await orderComboModel.count({status: 'wait'})
+  const countItemProcessing = await orderComboModel.count({status: 'processing', user_id: req.decoded.userID})
+  const countItemComplete = await orderComboModel.count({status: 'complete', user_id: req.decoded.userID})
+  const countItemCancel = await orderComboModel.count({status: 'cancel', user_id: req.decoded.userID})
+  res.render('./employee/e-dashboard', { 
+    decoded: req.decoded,
+    countWait: countItemWait,
+    countProcessing: countItemProcessing,
+    countComplete: countItemComplete,
+    countCancel: countItemCancel,
+   })
 });
 /* GET users listing. */
 router.get('/quan-ly-combo', checkLoginEmployee, employeeController.getAllComboWait);
