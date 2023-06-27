@@ -1,7 +1,8 @@
 var comboModel = require('../../models/combo.model');
-
 // Get active combo
 let getActiveCombo = async(req, res) => {
+    //console.log('abc:'+ req.decoded.userID);
+
     try {
         async function getItems() {
             const Items = await comboModel.find({
@@ -12,7 +13,10 @@ let getActiveCombo = async(req, res) => {
         
         getItems().then(function(FoundItems){
             //console.log(FoundItems);
-            res.render('./manager/m-dashboard', {data: FoundItems})
+            res.render('./manager/m-dashboard', {
+                data: FoundItems,
+                decoded: req.decoded
+            })
         });
     } catch (error) {
         console.log(error);

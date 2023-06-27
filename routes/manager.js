@@ -26,6 +26,7 @@ const checkLoginManager = (req, res, next) => {
     console.log(decoded.userLevel);
     if (decoded.userID && decoded.userLevel == 1) {
       req.decoded = decoded;
+      //console.log(req.decoded);
       next();
     } else {
       res.redirect('/');
