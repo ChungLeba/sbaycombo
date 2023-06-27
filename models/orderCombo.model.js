@@ -24,10 +24,11 @@ const customerProductSchema = new mongoose.Schema({
     user_id: [{ type: Schema.Types.ObjectId, ref: 'userModel' }], //ref tới model user
     timeCreateEmployee: {
         type: Date
-    },
+    },//Đang xử lý
     timeUpdateEmployee: {
         type: Date
-    }
+    },//Hoàn thành hoặc hủy
+    TotalPrice: Number,
 },
 {collection: 'orderCombo'}
 )

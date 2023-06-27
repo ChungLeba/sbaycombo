@@ -1,38 +1,51 @@
 var comboModel = require('../../models/combo.model');
+var orderComboModel = require('../../models/orderCombo.model');
+
 // Get active combo
-let getActiveCombo = async(req, res) => {
+let getActiveCombo = async (req, res) => {
     //console.log('abc:'+ req.decoded.userID);
 
     try {
-        async function getItems() {
-            const Items = await comboModel.find({
-                active: true
-            });
-            return Items;
-          }
-        
-        getItems().then(function(FoundItems){
-            //console.log(FoundItems);
-            res.render('./manager/m-dashboard', {
-                data: FoundItems,
-                decoded: req.decoded
-            })
+        var today = new Date();
+        var last30day = new Date(new Date().setDate(today.getDate() - 30));
+
+        const comboActive = await comboModel.find({
+            active: true
         });
+        
+        const comboActivity = await orderComboModel.find({
+            timeCreate: {
+                $gte:last30day
+            }
+        })
+            .sort({
+                timeUpdate: 'desc'
+            })
+            .populate('user_id')
+        /*  */
+        console.log(comboActivity[0]);
+
+        res.render('./manager/m-dashboard', {
+            data: comboActive,
+            decoded: req.decoded,
+            comboActivity: comboActivity
+        })
+
     } catch (error) {
         console.log(error);
     }
 };
 
 // Get all combo
-let getAllCombo = async(req, res) => {
+let getAllCombo = async (req, res) => {
     try {
         async function getItems() {
             const Items = await comboModel.find({
 
             });
             return Items;
-          }
-        getItems().then(function(FoundItems){
+        }
+        getItems().then(function (FoundItems) {
             //console.log(FoundItems);
             res.render('./manager/m-allCombos.ejs', {
                 data: FoundItems,
@@ -45,13 +58,13 @@ let getAllCombo = async(req, res) => {
 };
 
 // Create new product
-let createCombo = async(req, res) => {
+let createCombo = async (req, res) => {
     try {
         var imageUploads = [];
         for (var i = 0; i < req.files.length; i++) {
             imageUploads.push(req.files[i].filename)
         }
-            
+
         comboModel.create({
             name: req.body.name,
             location: req.body.location,
@@ -59,52 +72,52 @@ let createCombo = async(req, res) => {
             timeCombo: req.body.timeCombo,
             priceType: req.body.priceType,
             price: req.body.price,
-            priceChild:req.body.priceChild,
+            priceChild: req.body.priceChild,
             description: req.body.description,
             images: imageUploads
         })
-        .then(data => {
-            res.redirect("add-combo");
-        })
-        .catch(err => {
-            console.log("error");
-        })
+            .then(data => {
+                res.redirect("add-combo");
+            })
+            .catch(err => {
+                console.log("error");
+            })
     } catch (error) {
         console.log(error);
     }
 };
 
 // Read to view product
-let readToViewCombo = async(req, res) => {
+let readToViewCombo = async (req, res) => {
     try {
         comboModel.findById(req.params.id)
-        .then(FoundItem => {
-            res.render('./manager/m-read-combo', {
-                data: FoundItem,
-                decoded: req.decoded
+            .then(FoundItem => {
+                res.render('./manager/m-read-combo', {
+                    data: FoundItem,
+                    decoded: req.decoded
+                });
+            })
+            .catch(err => {
+                console.log("error");
             });
-        })
-        .catch(err => {
-            console.log("error");
-        });
     } catch (error) {
         console.log(error);
     }
 }
 // Read to update product
-let readToUpdateCombo = async(req, res) => {
+let readToUpdateCombo = async (req, res) => {
     try {
         comboModel.findById(req.params.id)
-        .then(FoundItem => {
-            console.log("Edit product", FoundItem);
-            res.render('./manager/m-update-combo', {
-                data: FoundItem,
-                decoded: req.decoded
+            .then(FoundItem => {
+                console.log("Edit product", FoundItem);
+                res.render('./manager/m-update-combo', {
+                    data: FoundItem,
+                    decoded: req.decoded
+                });
+            })
+            .catch(err => {
+                console.log("error edit product");
             });
-        })
-        .catch(err => {
-            console.log("error edit product");
-        });
     } catch (error) {
         console.log(error);
     }
@@ -119,17 +132,17 @@ let updateCombo = async (req, res) => {
         }
         if (imageUploads.length == 0) {
             await comboModel.findById(req.params.id)
-                                        .then(FoundItem => {
-                                            imageUploads = FoundItem.images;
-                                        })
-                                        .catch(err => {
-                                            console.log("error edit product");
-                                        });
+                .then(FoundItem => {
+                    imageUploads = FoundItem.images;
+                })
+                .catch(err => {
+                    console.log("error edit product");
+                });
         }
         await comboModel.findByIdAndUpdate(
             req.params.id,
             {
-                name: req.body.name, 
+                name: req.body.name,
                 location: req.body.location,
                 code: req.body.code,
                 timeCombo: req.body.timeCombo,
@@ -138,7 +151,7 @@ let updateCombo = async (req, res) => {
                 description: req.body.description,
                 images: imageUploads
             },
-            {new: true})
+            { new: true })
             .then(product => {
                 res.redirect("/manager");
             })
@@ -152,15 +165,15 @@ let updateCombo = async (req, res) => {
 /* Active */
 let activeCombo = async (req, res) => {
     try {
-        
+
         await comboModel.findByIdAndUpdate(
             req.body.id,
             {
-                active:true
+                active: true
             },
-            {new: true})
+            { new: true })
             .then(product => {
-                res.json({noiti: 'active'})
+                res.json({ noiti: 'active' })
             })
             .catch(err => {
                 res.status(500).send(err);
@@ -172,15 +185,15 @@ let activeCombo = async (req, res) => {
 /* Deactive */
 let deactiveCombo = async (req, res) => {
     try {
-        
+
         await comboModel.findByIdAndUpdate(
             req.body.id,
             {
-                active:false
+                active: false
             },
-            {new: true})
+            { new: true })
             .then(product => {
-                res.json({noiti: 'deactive'})
+                res.json({ noiti: 'deactive' })
             })
             .catch(err => {
                 res.status(500).send(err);
@@ -193,7 +206,7 @@ let deactiveCombo = async (req, res) => {
 let deleteCombo = async (req, res) => {
     try {
         await comboModel.findByIdAndDelete(req.params.id);
-        res.json({noiti:'deleted'});
+        res.json({ noiti: 'deleted' });
     } catch (error) {
         console.log("error", error);
         res.status(500).send("There was a problem deleting the product.");
@@ -204,10 +217,10 @@ module.exports = {
     getActiveCombo: getActiveCombo,
     getAllCombo: getAllCombo,
     createCombo: createCombo,
-    readToViewCombo:readToViewCombo,
+    readToViewCombo: readToViewCombo,
     readToUpdateCombo: readToUpdateCombo,
     updateCombo: updateCombo,
-    activeCombo:activeCombo,
-    deactiveCombo:deactiveCombo,
+    activeCombo: activeCombo,
+    deactiveCombo: deactiveCombo,
     deleteCombo: deleteCombo
 };
