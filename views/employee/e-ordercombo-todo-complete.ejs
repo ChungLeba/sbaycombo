@@ -230,7 +230,7 @@
         </div>
 
         <div class="flex justify-center">
-            <a href="/manager" class="text-center text-red-700 mb-2 justify-center">Quay lại</a>
+            <a href="/employee" class="text-center text-red-700 mb-2 justify-center">Quay lại</a>
         </div>
       </div>
 
@@ -245,7 +245,7 @@
       const orderId = e1.getAttribute("orderId");
       axios({
         method: 'post',
-        url: '/api/manager/updateStatus/' + orderId,
+        url: '/api/employee/updateStatus/' + orderId,
         data: {
           status: value,
           user_id: user_id
