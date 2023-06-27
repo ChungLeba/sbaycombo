@@ -105,33 +105,26 @@
       <p class="text-start ml-5 my-3">Các bombo đang áp dụng</p>
       <div class=" px-2 lg:overflow-visible lg:px-0">
         <div class="mx-auto max-w-7xl px-2 lg:px-8">
-
+          <% var regex=/(<([^>]+)>)/ig %>
           <div class="grid grid-row-4 gap-4">
-            <% for( let index=0; index < 4; index++ ) { %>
+            <% for( let index=0; index < data.length; index++ ) { %>
               <div class="grid lg:grid-cols-12 sm:grid-row-4 p-5 bg-white rounded-lg shadow-xl">
                 <div class="lg:col-span-2 mt-3">
-                  <img src="./images/sbay.jpg" class="rounded-lg mx-auto w-full" alt="">
+                  <img src="/uploads/<%= data[index].images[0] %>" class="rounded-lg mx-auto w-full" style="height: 100%;" alt="">
                 </div>
                 <div class="lg:col-span-10 p-5">
                   <div class="grid grid-cols-2">
-                    <p class="text-center flex flex-row"><i data-feather="map-pin" class="mr-2 w-4"></i>Đà Nẵng</p>
+                    <p class="text-center flex flex-row"><i data-feather="map-pin" class="mr-2 w-4"></i><%= data[index].location %></p>
 
                     <a href="#" class="rounded-lg text-red-700 text-xl text-end flex flex-row justify-end"><i
                         data-feather="eye" class="mr-2 mt-1"></i>Xem combo</a>
                   </div>
-                  <h3 class="text-2xl m2-3 font-bold">Combo 2N1Đ Sona Resort Ninh Bình Trọn Vé Xe Khứ Hồi</h3>
-                  <p class="mb-2">Trọn vé xe khứ hồi
-                    , Bao gồm giá phòng
-                    , Buffet sáng hoặc chọn món
-                    , Miễn phí sử dụng Internet Wifi.
-                    , Miễn phí 02 chai nước suối và 02 túi trà trong phòng mỗi ngày.
-                    , Miễn phí sử dụng hồ bơi
-                    , Xe đạp miễn phí
-                    , Nhiều điểm check in mới lạ : rose house, xích đu , góc sắc màu …</p>
-                  <p class="flex flex-row mb-2"><i data-feather="code" class="mr-2 w-4"></i>Mã Combo: HN52</p>
-                  <p class="flex flex-row mb-2"><i data-feather="clock" class="mr-2 w-4"></i>Thời gian: 2 ngày 1 đêm</p>
+                  <h3 class="text-2xl m2-3 font-bold"><%= data[index].name %></h3>
+                  <p class="mb-2"><%- data[index].description.slice(0,300).replace(regex, "" ) %></p>
+                  <p class="flex flex-row mb-2"><i data-feather="code" class="mr-2 w-4"></i>Mã Combo: <%= data[index].code %></p>
+                  <p class="flex flex-row mb-2"><i data-feather="clock" class="mr-2 w-4"></i>Thời gian: <%= data[index].timeCombo %></p>
                   <p class="flex flex-row mb-2"><i data-feather="shopping-bag" class="mr-2 w-4"></i>150 đã đặt</p>
-                  <p class="flex flex-row mb-2"><i data-feather="dollar-sign" class="mr-2 w-4"></i>820.000đ/khách</p>
+                  <p class="flex flex-row mb-2"><i data-feather="dollar-sign" class="mr-2 w-4"></i><%= formatPrice(data[index].price) %> đ/khách</p>
                 </div>
 
               </div>
