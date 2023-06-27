@@ -1,6 +1,7 @@
 var userModel = require('../models/user.model.js');
 const crypto = require('crypto');
 var jwt = require('jsonwebtoken');
+const session = require('express-session');
 
 // Create User
 let createUser = async (req, res) => {
@@ -49,7 +50,7 @@ let createUser = async (req, res) => {
     }
 };
 
-// Create User
+// Login User
 let loginUser = async (req, res) => {
     try {
         const findAcc =
@@ -58,24 +59,21 @@ let loginUser = async (req, res) => {
                     userPhone: req.body.userPhone,
 
                 })
-        console.log('findAcc: ', findAcc);
+        // console.log('findAcc: ', findAcc);
         if (findAcc == null) {
             res.json({ 'noiti': 'Số điện thoại chưa đăng ký' })
-        } else if (findAcc.userLevel == 3) {
+        } else if (findAcc.userLevel) {
             // Hashing calculato,
             const hash = crypto.pbkdf2Sync(req.body.password, findAcc.userSalt,
                 1000, 64, `sha512`).toString(`hex`);
 
             /* Check Hash */
-            const checkHash =
-                await
-                    userModel.findOne({
-                        userHash: hash
-                    })
+            const checkHash = await userModel.findOne({userHash: hash});
+            
             console.log(checkHash);
             if (checkHash) {
                 console.log('checkHash', checkHash);
-                var token = jwt.sign({ userID: checkHash._id }, process.env.CookiesSecretKey);
+                var token = jwt.sign({ userID: checkHash._id, userLevel: checkHash.userLevel }, process.env.CookiesSecretKey);
                 res.cookie('SbayComboEtoken', token)
                 res.json({ 'noiti': 'Đăng nhập thành công' })
                 //res.end('Dang nhap thanh cong')
@@ -89,7 +87,22 @@ let loginUser = async (req, res) => {
     }
 };
 
+/* Check login */
+const checkloginManager = function (req, res, next) {
+    if (req.cookies.SbayManagertoken) {
+      var decoded = jwt.verify(req.cookies.SbayManagertoken, process.env.CookiesSecretKey);
+      console.log(decoded);
+      if (decoded.userID && decoded.userLevel) {
+        req.decoded = decoded
+        next()
+      }
+    } else {
+      res.redirect('/dang-nhap')
+    }
+}
+
 module.exports = {
     createUser: createUser,
-    loginUser: loginUser
+    loginUser: loginUser,
+    checkloginManager: checkloginManager
 };

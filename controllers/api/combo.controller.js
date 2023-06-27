@@ -20,7 +20,39 @@ let getActiveCombo = async(req, res) => {
 let getLimitCombo = async(req, res) => {
     try {
         async function getItems() {
-            const Items = await comboModel.find({}).limit(3);
+            const Items = await comboModel.find({}).limit(4);
+            return Items;
+          }
+
+        getItems().then(function(FoundItems){
+            res.send({data: FoundItems});
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+// Get 1 combo
+let getLimit1Combo = async(req, res) => {
+    try {
+        async function getItems() {
+            const Items = await comboModel.find({}).limit(1);
+            return Items;
+          }
+
+        getItems().then(function(FoundItems){
+            res.send({data: FoundItems});
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+// Get 4 combo
+let getLimit4Combo = async(req, res) => {
+    try {
+        async function getItems() {
+            const Items = await comboModel.find({}).limit(4);
             return Items;
           }
 
@@ -47,8 +79,23 @@ let showCombo = async(req, res) => {
     }
 }
 
+// Show remaining combos
+let remainingCombo = async(req, res) => {
+    try {
+        // Truy vấn để lấy các combo còn lại và loại bỏ combo cụ thể
+        const query = { _id: { $nin: [req.params.id] } };
+        const result = await comboModel.find(query);
+        res.send({data: result});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     getActiveCombo: getActiveCombo,
     getLimitCombo: getLimitCombo,
-    showCombo: showCombo
+    showCombo: showCombo,
+    remainingCombo: remainingCombo,
+    getLimit1Combo: getLimit1Combo,
+    getLimit4Combo: getLimit4Combo
 };

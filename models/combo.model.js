@@ -21,11 +21,11 @@ const comboSchema = new mongoose.Schema({
     images: [],
     timeCreate: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     },
     timeUpdate: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     }
 },
 {collection: 'combo'}

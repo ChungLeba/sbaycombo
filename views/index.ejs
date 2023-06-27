@@ -59,7 +59,7 @@
                 class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Quên mật
                 khẩu?</a>
             </div>
-            <button onclick="dangNhap()"
+            <button onclick="dangNhap()" type="submit"
               class=" btn w-full text-white bg-red-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Đăng
               nhập</button>
           </div>
@@ -68,28 +68,36 @@
       <a href="/" class="text-center mt-3 underline text-red-600">Về trang chủ</a>
     </div>
   </section>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
   <script>
     function dangNhap() {
-      axios({
-        method: 'post',
-        url: 'http://localhost:3000/',
-        responseType: 'json',
-        data: {
-          userPhone: document.getElementById('userPhone').value,
-          password: document.getElementById('password').value
-        }
-      })
-        .then(function (res) {
-          console.log(res);
-          if (res.data.noiti == "Số điện thoại chưa đăng ký") {
-            alert('Số điện thoại chưa đăng ký')
-          } else if(res.data.noiti == 'Sai mat khau') {
-            alert('Vui lòng nhập lại mật khẩu !')
-          }  else if(res.data.noiti == 'Đăng nhập thành công') {
-            //alert('Chúc mừng bạn đã đăng ký thành công !')
-            window.location.href = ("/employee")
+      const userPhone = document.getElementById('userPhone').value;
+      const userPassword = document.getElementById('password').value;
+      if (userPhone == '' || userPassword == '') {
+        alert('Vui lòng điền đầy đủ thông tin');
+      } else {
+        axios({
+          method: 'post',
+          url: '/dang-nhap',
+          responseType: 'json',
+          data: {
+            userPhone: userPhone,
+            password: userPassword
           }
-        });
+        })
+          .then(function (res) {
+            console.log(res);
+            if (res.data.noiti == "Số điện thoại chưa đăng ký") {
+              alert('Số điện thoại chưa đăng ký')
+            } else if(res.data.noiti == 'Sai mat khau') {
+              alert('Vui lòng nhập lại mật khẩu !')
+            }  else if(res.data.noiti == 'Đăng nhập thành công') {
+              //alert('Chúc mừng bạn đã đăng ký thành công !')
+              window.location.href = ("/manager")
+            }
+          });
+      }
+
 
     }
   </script>

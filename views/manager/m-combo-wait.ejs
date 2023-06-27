@@ -60,9 +60,9 @@
                         <td class="whitespace-nowrap px-2 py-4"><%= data[index].product_id[0].code %></td>
                         <td class="whitespace-nowrap px-2 py-4 font-bold"><%= data[index].product_id[0].name %></td>
                         <td class="whitespace-nowrap px-2 py-4 font-bold"><%= formatPrice(data[index].product_id[0].price) %> VND</td>
-                        <td class="whitespace-nowrap px-2 py-4 text-red-600"><%= data[index].status == 1 ? 'Chờ xử lý' : '' %></td>
+                        <td class="whitespace-nowrap px-2 py-4 text-red-600"><%= data[index].status == 'wait' ? 'Chờ xử lý' : '' %></td>
                         <td class="whitespace-nowrap px-2 py-4 ">
-                          <a href="/manager/order/" class="btn btn-sm btn-outline btn-success mr-2">Xử lý</a>
+                          <a href="/manager/orderCombo-wait/<%= data[index]._id %>" class="btn btn-sm btn-outline btn-success mr-2">Xử lý</a>
                         </td>
                       </tr>
                       <% } %>
@@ -77,7 +77,7 @@
     </div>
     
     <!-- add button -->
-    <%- include('m-com-add-button.ejs'); -%>
+    <!-- <%- include('m-com-add-button.ejs'); -%> -->
     <script>
       feather.replace()
     </script>

@@ -50,22 +50,20 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% for( let index=0; index < 3; index++ ) { %>
+                    <% for( let index=0; index < data.length; index++ ) { %>
                       <tr
                         class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
                         <td class="whitespace-nowrap px-2 py-4 font-medium">
                           <%= index +1 %>
                         </td>
-                        <td class="whitespace-nowrap px-2 py-4">08:08am, ngày 12/12/2022</td>
-                        <td class="whitespace-nowrap px-2 py-4 font-bold">Lê Hoài Bảo</td>
-                        <td class="whitespace-nowrap px-2 py-4">#HN52</td>
-                        <td class="whitespace-nowrap px-2 py-4 font-bold">Combo 2N1Đ Sona Resort Ninh Bình Trọn Vé Xe
-                          Khứ Hồi</td>
-                        <td class="whitespace-nowrap px-2 py-4 text-green-600">10:08, ngày 12/12/2022</td>
-                        <td class="whitespace-nowrap px-2 py-4">
-
-                          <button class="btn btn-sm btn-outline bg-blue-600 mr-2 text-white">Hoàn thành</button>
-                          <button class="btn btn-sm btn-outline btn-danger">Hủy</button>
+                        <td class="whitespace-nowrap px-2 py-4"><%= data[index].timeCreateEmployee.toLocaleString() %></td>
+                        <td class="whitespace-nowrap px-2 py-4 font-bold"><%= data[index].customer_id[0].name %></td>
+                        <td class="whitespace-nowrap px-2 py-4"><%= data[index].product_id[0].code %></td>
+                        <td class="whitespace-nowrap px-2 py-4 font-bold"><%= data[index].product_id[0].name %></td>
+                        <td class="whitespace-nowrap px-2 py-4 text-green-600"><%= formatPrice(data[index].product_id[0].price) %> VND</td>
+                        <td class="whitespace-nowrap px-2 py-4 text-violet-600"><%= data[index].user_id[0].userName %></td>
+                        <td class="whitespace-nowrap px-2 py-4 ">
+                          <a href="/employee/orderCombo-processing/<%= data[index]._id %>" class="btn btn-sm btn-outline btn-success mr-2">Xử lý</a>
                         </td>
                       </tr>
                       <% } %>
