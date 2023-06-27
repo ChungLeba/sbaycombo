@@ -179,7 +179,7 @@
                       <td></td>
                       <td class="text-end"></td>
                       <td class="text-end">Tổng:</td>
-                      <td class="text-end font-bold"><%= (order.customer_id[0].numberAudult * order.product_id[0].price + order.customer_id[0].numberChildren * order.product_id[0].priceChild).toLocaleString('en-US', {style : 'currency', currency : 'VND'}) %></td>
+                      <td class="text-end font-bold"><%= formatPrice(order.customer_id[0].numberAudult * order.product_id[0].price + order.customer_id[0].numberChildren * order.product_id[0].priceChild) %>đ</td>
                     </tr>
                     
                   </tbody>

@@ -179,7 +179,7 @@
                       <td></td>
                       <td class="text-end"></td>
                       <td class="text-end">Tổng:</td>
-                      <td class="text-end font-bold"><%= (order.customer_id[0].numberAudult * order.product_id[0].price + order.customer_id[0].numberChildren * order.product_id[0].priceChild).toLocaleString('en-US', {style : 'currency', currency : 'VND'}) %></td>
+                      <td class="text-end font-bold"><%= formatPrice(order.customer_id[0].numberAudult * order.product_id[0].price + order.customer_id[0].numberChildren * order.product_id[0].priceChild) %>đ</td>
                     </tr>
                     
                   </tbody>
@@ -202,6 +202,9 @@
 
               <!-- Step -->
               <input type="hidden" id="hiddenUserID" value="<%= decoded.userID %>">
+              <input type="hidden" id="hiddenUserName" value="<%= decoded.userName %>">
+              <input type="hidden" id="customerName" value="<%= order.customer_id[0].name %>">
+              <input type="hidden" id="sumPrice" value="<%= order.customer_id[0].numberAudult * order.product_id[0].price + order.customer_id[0].numberChildren * order.product_id[0].priceChild %>">
               <div class="flex flex-row mt-5">
                 <i data-feather="file-text" class="w-4 h-4 mr-2 mt-1"></i>
                 <h2 class="font-bold">Tiến trình xử lý</h2>
@@ -243,6 +246,9 @@
     function confirm() {
       const value = document.getElementById('todostatus').value;
       const user_id = document.getElementById('hiddenUserID').value;
+      const customer_name = document.getElementById('customerName').value;
+      const user_name = document.getElementById('hiddenUserName').value;
+      const sum_price = document.getElementById('sumPrice').value;
       const e1 = document.getElementById("btnConfirm");
       const orderId = e1.getAttribute("orderId");
       axios({
@@ -250,7 +256,10 @@
         url: '/api/employee/updateStatus/' + orderId,
         data: {
           status: value,
-          user_id: user_id
+          user_id: user_id,
+          user_name: user_name,
+          customer_name: customer_name,
+          sum_price: sum_price
         }
       })
         .then(function (res) {

@@ -1,4 +1,5 @@
 var comboModel = require('../../models/combo.model');
+var logActionEmployeeModel = require('../../models/logActionEmployee.model');
 // Get active combo
 let getActiveCombo = async(req, res) => {
     //console.log('abc:'+ req.decoded.userID);
@@ -11,11 +12,14 @@ let getActiveCombo = async(req, res) => {
             return Items;
           }
         
+        const dataLogs = await logActionEmployeeModel.find({}).sort({'timeCreate': 'desc'}).limit(5);
+        
         getItems().then(function(FoundItems){
             //console.log(FoundItems);
             res.render('./manager/m-dashboard', {
                 data: FoundItems,
-                decoded: req.decoded
+                decoded: req.decoded,
+                dataLogs: dataLogs
             })
         });
     } catch (error) {

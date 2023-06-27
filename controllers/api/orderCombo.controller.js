@@ -1,6 +1,6 @@
 var orderComboModel = require('../../models/orderCombo.model');
-// const nodemailer = require('nodemailer');
 var configSendMail = require('../../config/sendMail');
+var logActionComboModel = require('../../models/logActionEmployee.model');
 
 // Update status order combo
 let updateSatusOrderCombo = async (req, res) => {
@@ -13,7 +13,23 @@ let updateSatusOrderCombo = async (req, res) => {
                 timeCreateEmployee: Date.now(),
                 timeUpdateEmployee: Date.now()
             });
-            console.log(OrderComboEmptyDateEmployee);
+            // console.log(OrderComboEmptyDateEmployee);
+            if (req.body.status == 'processing') {
+                await logActionComboModel.create({
+                    subject: "Đang xử lý",
+                    employeeName: req.body.user_name,
+                    customerName: req.body.customer_name,
+                    price: req.body.sum_price,
+                    status: req.body.status
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(err => {
+                    console.log("error", err);
+                })
+            }
+            
             res.json({data: OrderComboEmptyDateEmployee});
         } else {
             const OrderComboNotEmptyDateEmployee = await orderComboModel.findByIdAndUpdate(req.params.id, {
@@ -21,12 +37,37 @@ let updateSatusOrderCombo = async (req, res) => {
                 user_id: req.body.user_id,
                 timeUpdateEmployee: Date.now()
             });
+
+            if (req.body.status == 'processing') {
+                await logActionComboModel.create({
+                    subject: "Đang xử lý",
+                    employeeName: req.body.user_name,
+                    customerName: req.body.customer_name,
+                    price: req.body.sum_price,
+                    status: req.body.status
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(err => {
+                    console.log("error", err);
+                })
+            }
+
             res.json({data: OrderComboNotEmptyDateEmployee});
-        }
-        const customers = await orderComboModel.findById(req.params.id)
+
+            const customers = await orderComboModel.findById(req.params.id)
                         .populate('product_id')
                         .populate('customer_id');
         if (req.body.status == 'complete') {
+            await logActionComboModel.create({
+                subject: "Hoàn thành",
+                employeeName: req.body.user_name,
+                customerName: req.body.customer_name,
+                price: req.body.sum_price,
+                status: req.body.status
+            })
+
             // setup email data
             let mailOptions = {
                 from: '"SBAY VN" <vansang1532000@gmail.com>', // sender address
@@ -45,6 +86,13 @@ let updateSatusOrderCombo = async (req, res) => {
             }
         }
         if (req.body.status == 'cancel') {
+            await logActionComboModel.create({
+                subject: "Huỷ",
+                employeeName: req.body.user_name,
+                customerName: req.body.customer_name,
+                price: req.body.sum_price,
+                status: req.body.status
+            })
             // setup email data
             let mailOptions = {
                 from: '"SBAY VN" <vansang1532000@gmail.com>', // sender address
@@ -62,6 +110,8 @@ let updateSatusOrderCombo = async (req, res) => {
                 res.status(500).json({error: error});
             }
         }
+        }
+        
     } catch (error) {
         res.status(500).json({error: error});
     }

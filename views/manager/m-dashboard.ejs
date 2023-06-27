@@ -117,16 +117,16 @@
               </thead>
               <tbody>
                 <!-- row 1 -->
-                <% for( let index=0; index < 5; index++ ) { %>
+                <% for( let index=0; index < dataLogs.length; index++ ) { %>
                   <tr>
                     <th>
                       <%= index +1 %>
                     </th>
-                    <td class="font-bold mr-1 text-violet-600">3 phút trước</td>
-                    <td class="font-bold mr-1 text-violet-600">Sang</td>
-                    <td class=" font-semibold">Lê Hoàng Nam</td>
-                    <td class=" font-semibold">2,000,000</td>
-                    <td class=" mr-1">đang xử lý </td>
+                    <td class="font-bold mr-1 text-violet-600"><%= moment(dataLogs[index].timeCreate).fromNow() %></td>
+                    <td class="font-bold mr-1 text-violet-600"><%= dataLogs[index].employeeName %></td>
+                    <td class=" font-semibold"><%= dataLogs[index].customerName %></td>
+                    <td class=" font-semibold"><%= formatPrice(dataLogs[index].price) %>đ</td>
+                    <td class=" mr-1"><%= dataLogs[index].subject %></td>
                   </tr>
                   <% } %>
 
