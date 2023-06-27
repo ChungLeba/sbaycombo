@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 
 
 // Create User
-let  = async (req, res) => {
+let createUser = async (req, res) => {
     try {
         /* Hash */
         // Creating a unique salt for a particular user

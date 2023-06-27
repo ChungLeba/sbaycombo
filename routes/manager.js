@@ -40,6 +40,11 @@ router.get('/quan-ly-combo', comboController.getAllCombo);
 
 /* GET users listing. */
 router.get('/quan-ly-nhan-vien', managerController.findAllEmployee);
+/* Put Active User */
+router.put('/employee', managerController.activeEmployee);
+/* Delete User */
+router.delete('/employee', managerController.deleteEmployee);
+
 /* GET users listing. */
 router.get('/add-combo', function(req, res, next) {
   res.render('./manager/m-add-combo')

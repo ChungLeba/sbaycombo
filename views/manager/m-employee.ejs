@@ -11,8 +11,14 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.0.22/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
 
 </head>
@@ -34,21 +40,23 @@
             </div>
             <h1 class="text-2xl mt-5 text-center text-red-600 font-bold">Danh sách nhân viên</h1>
 
-            <p class="text-center">Cập nhật lúc: </p>
+            <p class="text-center">Cập nhật <%= moment().fromNow() %>
+            </p>
             <div class="text-end">
 
               <!-- Open the modal using ID.showModal() method -->
-              <button class="btn bg-green-600 text-white" onclick="my_modal_1.showModal()"><i data-feather="user-plus" class=" w-4"></i> Mời nhân viên</button>
+              <button class="btn bg-green-600 text-white" onclick="my_modal_1.showModal()"><i data-feather="user-plus"
+                  class=" w-4"></i> Mời nhân viên</button>
               <dialog id="my_modal_1" class="modal">
                 <form method="dialog" class="modal-box text-center">
                   <h3 class="font-bold text-lg">Xin chào</h3>
-                  <p class="py-4">Để mời nhân viên bạn vui lòng gửi đường Link sau đây để nhân viên đăng ký, sau đó duyệt nhân viên</p>
-                  <p class="text-2xl font-bold">Bước 1:Copy và gửi link sau</p>
-                  <div class="mockup-code my-5">
-                    <pre data-prefix="$"><code>https://www.sbayhotelphuquoc.com/</code></pre>
+                  <p class="py-4">Để mời nhân viên bạn vui lòng gửi đường Link sau đây để nhân viên đăng ký, sau đó
+                    duyệt nhân viên</p>
+                  <p class="text-xl font-bold">Bước 1: Copy và gửi link sau</p>
+                  <div class="mockup-code my-5 bg-slate-500">
+                    <pre data-prefix="$"><code>http://localhost:3000/dang-ky</code></pre>
                   </div>
-                  <p class="text-2xl font-bold">Bước 2: vào quản lý nhân viên để duyệt</p>
-                  <a href="/manager/quan-ly-nhan-vien" class="mt-5 text-xl text-blue-600">Quản lý nhân viên</a>
+                  <p class="text-xl font-bold">Bước 2: Nhấn duyệt</p>
                   <div class="modal-action">
                     <!-- if there is a button in form, it will close the modal -->
                     <button class="btn">Close</button>
@@ -59,36 +67,52 @@
 
             <div class="inline-block min-w-full py-2 sm:px-2 lg:px-8">
               <div class="overflow-hidden">
-                <table class="min-w-full text-left text-sm font-light">
+                <table class="min-w-full text-left text-sm font-light" id="myTable">
                   <thead class="border-b font-medium dark:border-neutral-500">
                     <tr>
                       <th scope="col" class="px-2 py-4">#</th>
                       <th scope="col" class="px-2 py-4">Tài khoản</th>
-                      <th scope="col" class="px-2 py-4">Tên nhân viên</th>
-                      <th scope="col" class="px-2 py-4">Số điện thoại</th>
+                      <th scope="col" class="px-2 py-4">Họ tên</th>
+                      <th scope="col" class="px-2 py-4">Email</th>
                       <th scope="col" class="px-2 py-4">Trạng thái</th>
-                      <th scope="col" class="px-2 py-4">Hành động</th>
+                      <th scope="col" class="px-2 py-4 text-end">Hành động</th>
 
                     </tr>
                   </thead>
                   <tbody>
-                    <% for( let index=0; index < 100; index++ ) { %>
+                    <% for( let index=0; index < employees.length; index++ ) { %>
                       <tr
                         class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
                         <td class="whitespace-nowrap px-2 py-4 font-medium">
                           <%= index +1 %>
                         </td>
-                        <td class="whitespace-nowrap px-2 py-4">lehoaibao</td>
-                        <td class="whitespace-nowrap px-2 py-4 font-bold">Lê Hoài Bảo</td>
-                        <td class="whitespace-nowrap px-2 py-4">0987888999</td>
-                        <td class="whitespace-nowrap px-2 py-4 text-red-600">Chờ duyệt</td>
+                        <td class="whitespace-nowrap px-2 py-4 font-bold">
+                          <%= employees[index].userPhone %>
+                        </td>
                         <td class="whitespace-nowrap px-2 py-4">
-                          <button class="btn btn-sm btn-outline btn-success mr-2">Duyệt</button>
-                          <button class="btn btn-sm btn-outline btn-warning mr-2">Khóa</button>
-                          <button class="btn btn-sm btn-outline btn-danger">Xóa</button>
-
+                          <%= employees[index].userName %>
+                        </td>
+                        <td class="whitespace-wrap px-2 py-4">
+                          <%= employees[index].userEmail %>
                         </td>
 
+                        <td class="whitespace-nowrap px-2 py-4 ">
+                          <% if (employees[index].userActive==false) { %>
+                            <p class="text-red-600">
+                              Chưa duyệt
+                            </p>
+                            <% } else if (employees[index].userActive==true) { %>
+                              <p class="text-green-600">
+                                Đã duyệt
+                              </p>
+                              <% } %>
+                        </td>
+                        <td class="whitespace-nowrap px-2 py-4 text-end">
+                          <button onclick="active(this.id)" id="<%= employees[index]._id %>"
+                            class="btn btn-sm btn-outline btn-success mr-2">Duyệt</button>
+                          <button onclick="deleteUser(this.id)" id="<%= employees[index]._id %>"
+                            class="btn btn-sm btn-outline btn-danger">Xóa</button>
+                        </td>
                       </tr>
                       <% } %>
 
@@ -102,7 +126,55 @@
       </div>
     </div>
     <script>
+      function active(userId) {
+        //console.log(userId);
+        if (confirm("Bạn muốn duyệt nhân viên này?") == true) {
+          axios({
+            method: 'put',
+            url: 'http://localhost:3000/manager/employee',
+            responseType: 'json',
+            data: {
+              userID: userId
+            }
+          })
+            .then(function (res) {
+              console.log(res);
+              if (res.data.noiti == "active ok") {
+                alert('Duyệt thành công')
+                window.location.reload()
+              }
+            });
+        }
+
+
+      }
+      /*  */
+      function deleteUser(userId) {
+        //console.log(userId);
+        if (confirm("Bạn muốn xóa nhân viên này?") == true) {
+          axios({
+            method: 'delete',
+            url: 'http://localhost:3000/manager/employee',
+            responseType: 'json',
+            data: {
+              userID: userId
+            }
+          })
+            .then(function (res) {
+              console.log(res);
+              if (res.data.noiti == "delete user ok") {
+                alert('Xóa thành công')
+                window.location.reload()
+              }
+            });
+        }
+      }
+      /*  */
       feather.replace()
+      let table = new DataTable('#myTable');
+
+
+
     </script>
 </body>
 
