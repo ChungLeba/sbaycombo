@@ -2,27 +2,22 @@ var express = require('express');
 var router = express.Router();
 var userModel = require('../models/user.model.js');
 var jwt = require('jsonwebtoken');
+const employeeController = require('../controllers/employee/employee.controller.js');
+const orderComboController = require('../controllers/employee/orderCombo.controller.js');
 
-/* Check login */
-const checkLoginEmployee = function (req, res, next) {
+// Authorization url employee
+const checkLoginEmployee = (req, res, next) => {
   if (req.cookies.SbayComboEtoken) {
     var decoded = jwt.verify(req.cookies.SbayComboEtoken, process.env.CookiesSecretKey);
-    console.log(decoded);
-    if (decoded.userID) {
-      userModel.findById(decoded.userID)
-        .then(data => {
-          console.log(data);
-          if (data.userActive == true) {
-            req.decoded = decoded
-            next()
-          } else if (data.userActive == false) {
-             
-            res.redirect('/tai-khoan-doi-duyet')
-          }
-        })
+    console.log(decoded.userLevel);
+    if (decoded.userID && decoded.userLevel == 3) {
+      req.decoded = decoded;
+      next();
+    } else {
+      res.redirect('/');
     }
   } else {
-    res.redirect('/dang-nhap')
+    console.log("user does not have permission");
   }
 }
 
@@ -31,19 +26,24 @@ router.get('/', checkLoginEmployee, function (req, res, next) {
   res.render('./employee/e-dashboard')
 });
 /* GET users listing. */
-router.get('/quan-ly-combo', function (req, res, next) {
-  res.render('./employee/e-combo-wait')
-});
+router.get('/quan-ly-combo', checkLoginEmployee, employeeController.getAllComboWait);
 /* GET users listing. */
-router.get('/quan-ly-combo-dang-xu-ly', function (req, res, next) {
-  res.render('./employee/e-combo-processing')
-});
+router.get('/quan-ly-combo-dang-xu-ly', checkLoginEmployee, employeeController.getAllComboProcessing);
 /* GET users listing. */
-router.get('/quan-ly-combo-hoan-thanh', function (req, res, next) {
-  res.render('./employee/e-combo-complete')
-});
+router.get('/quan-ly-combo-hoan-thanh', checkLoginEmployee, employeeController.getAllComboComplete);
 /* GET users listing. */
-router.get('/quan-ly-combo-huy', function (req, res, next) {
-  res.render('./employee/e-combo-cancel')
-});
+router.get('/quan-ly-combo-huy', checkLoginEmployee, employeeController.getAllComboCancel);
+
+/* GET 1 orderCombo wait */
+router.get('/orderCombo-wait/:id', checkLoginEmployee, orderComboController.oneOrderComboWait);
+/* GET 1 orderCombo processing */
+router.get('/orderCombo-processing/:id', checkLoginEmployee, orderComboController.oneOrderComboProcessing);
+/* GET 1 orderCombo complete */
+router.get('/orderCombo-complete/:id', checkLoginEmployee, orderComboController.oneOrderComboComplete);
+/* GET 1 orderCombo cancel */
+router.get('/orderCombo-cancel/:id', checkLoginEmployee, orderComboController.oneOrderComboCancel);
+
+// router.get('/quan-ly-combo-dang-cho', function (req, res, next) {
+//   res.render('./employee/e-ordercombo-todo')
+// });
 module.exports = router;
