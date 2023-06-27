@@ -12,7 +12,10 @@ let getAllComboWait = async(req, res) => {
         }
 
         getItems().then(function(FoundItems) {
-            res.render('./employee/e-combo-wait', {data: FoundItems});
+            res.render('./employee/e-combo-wait', {
+                data: FoundItems,
+                decoded: req.decoded
+            });
         });
     } catch (error) {
         console.log(error);
@@ -32,7 +35,10 @@ let getAllComboProcessing = async(req, res) => {
         }
 
         getItems().then(function(FoundItems) {
-            res.render('./employee/e-combo-processing', {data: FoundItems});
+            res.render('./employee/e-combo-processing', {
+                data: FoundItems,
+                decoded: req.decoded
+            });
         });
     } catch (error) {
         console.log(error);
@@ -52,7 +58,10 @@ let getAllComboComplete = async(req, res) => {
         }
 
         getItems().then(function(FoundItems) {
-            res.render('./employee/e-combo-complete', {data: FoundItems});
+            res.render('./employee/e-combo-complete', {
+                data: FoundItems,
+                decoded: req.decoded
+            });
         });
     } catch (error) {
         console.log(error);
@@ -72,10 +81,13 @@ let getAllComboCancel = async(req, res) => {
         }
 
         getItems().then(function(FoundItems) {
-            res.render('./employee/e-combo-cancel', {data: FoundItems});
+            res.render('./employee/e-combo-cancel', {
+                data: FoundItems,
+                decoded: req.decoded
+            });
         });
     } catch (error) {
-        console.log(error);
+        res.status(500).json({error: error});
     }
 }
 

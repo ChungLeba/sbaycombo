@@ -79,7 +79,10 @@ let readToViewCombo = async(req, res) => {
     try {
         comboModel.findById(req.params.id)
         .then(FoundItem => {
-            res.render('./manager/m-read-combo', {data: FoundItem});
+            res.render('./manager/m-read-combo', {
+                data: FoundItem,
+                decoded: req.decoded
+            });
         })
         .catch(err => {
             console.log("error");
@@ -94,7 +97,10 @@ let readToUpdateCombo = async(req, res) => {
         comboModel.findById(req.params.id)
         .then(FoundItem => {
             console.log("Edit product", FoundItem);
-            res.render('./manager/m-update-combo', {data: FoundItem});
+            res.render('./manager/m-update-combo', {
+                data: FoundItem,
+                decoded: req.decoded
+            });
         })
         .catch(err => {
             console.log("error edit product");

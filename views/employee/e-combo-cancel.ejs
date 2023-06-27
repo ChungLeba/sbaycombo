@@ -45,9 +45,9 @@
                       <th scope="col" class="px-2 py-4">Khách hàng</th>
                       <th scope="col" class="px-2 py-4">Mã Combo</th>
                       <th scope="col" class="px-2 py-4">Tên Combo</th>
-                      <th scope="col" class="px-2 py-4">Thời gian hủy</th>
+                      <th scope="col" class="px-2 py-4">Giá tiền</th>
                       <th scope="col" class="px-2 py-4">Nhân viên xử lý</th>
-
+                      <th scope="col" class="px-2 py-4">Hành động</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -62,7 +62,7 @@
                         <td class="whitespace-nowrap px-2 py-4"><%= data[index].product_id[0].code %></td>
                         <td class="whitespace-nowrap px-2 py-4 font-bold"><%= data[index].product_id[0].name %></td>
                         <td class="whitespace-nowrap px-2 py-4 text-green-600"><%= formatPrice(data[index].product_id[0].price) %> VND</td>
-                        <td class="whitespace-nowrap px-2 py-4 text-violet-600"><%= data[index].user_id[0].userName %></td>
+                        <td class="whitespace-nowrap px-2 py-4 text-violet-600"><%= decoded.userName %></td>
                         <td class="whitespace-nowrap px-2 py-4 ">
                           <a href="/employee/orderCombo-cancel/<%= data[index]._id %>" class="btn btn-sm btn-outline btn-success mr-2">Xem</a>
                         </td>

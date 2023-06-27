@@ -23,7 +23,7 @@ const checkLoginEmployee = (req, res, next) => {
 
 /* GET employee dashboard. */
 router.get('/', checkLoginEmployee, function (req, res, next) {
-  res.render('./employee/e-dashboard')
+  res.render('./employee/e-dashboard', { decoded: req.decoded })
 });
 /* GET users listing. */
 router.get('/quan-ly-combo', checkLoginEmployee, employeeController.getAllComboWait);

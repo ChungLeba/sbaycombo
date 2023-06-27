@@ -13,14 +13,15 @@ let updateSatusOrderCombo = async (req, res) => {
                 timeCreateEmployee: Date.now(),
                 timeUpdateEmployee: Date.now()
             });
-            res.send({data: OrderComboEmptyDateEmployee});
+            console.log(OrderComboEmptyDateEmployee);
+            res.json({data: OrderComboEmptyDateEmployee});
         } else {
             const OrderComboNotEmptyDateEmployee = await orderComboModel.findByIdAndUpdate(req.params.id, {
                 status: req.body.status,
                 user_id: req.body.user_id,
                 timeUpdateEmployee: Date.now()
             });
-            res.send({data: OrderComboNotEmptyDateEmployee});
+            res.json({data: OrderComboNotEmptyDateEmployee});
         }
         const customers = await orderComboModel.findById(req.params.id)
                         .populate('product_id')
@@ -38,9 +39,9 @@ let updateSatusOrderCombo = async (req, res) => {
             // send mail with defined transport object
             try {
                 let info = await configSendMail.transporter.sendMail(mailOptions);
-                res.send('Email sent!');
+                res.json('Email sent!');
             } catch (error) {
-                res.send('Error: ' + error.toString());
+                res.status(500).json({error: error});
             }
         }
         if (req.body.status == 'cancel') {
@@ -56,13 +57,13 @@ let updateSatusOrderCombo = async (req, res) => {
             // send mail with defined transport object
             try {
                 let info = await configSendMail.transporter.sendMail(mailOptions);
-                res.send('Email sent!');
+                res.json('Email sent!');
             } catch (error) {
-                res.send('Error: ' + error.toString());
+                res.status(500).json({error: error});
             }
         }
     } catch (error) {
-        res.send(error);
+        res.status(500).json({error: error});
     }
 }
 

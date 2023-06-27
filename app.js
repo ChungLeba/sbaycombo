@@ -13,6 +13,7 @@ var employeeRouter = require('./routes/employee');
 // Call API
 var apiManagerRouter = require('./routes/api/manager');
 var apiCustomerRouter = require('./routes/api/customer');
+var apiEmployeeRouter = require('./routes/api/employee');
 
 var app = express();
 app.locals.moment = moment
@@ -48,6 +49,7 @@ app.use('/employee', employeeRouter);
 // API
 app.use('/api/manager', apiManagerRouter);
 app.use('/api/customer', apiCustomerRouter);
+app.use('/api/employee', apiEmployeeRouter);
 
 
 // catch 404 and forward to error handler
