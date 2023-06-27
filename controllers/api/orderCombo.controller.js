@@ -39,7 +39,7 @@ let updateSatusOrderCombo = async (req, res) => {
             // send mail with defined transport object
             try {
                 let info = await configSendMail.transporter.sendMail(mailOptions);
-                res.json('Email sent!');
+               
             } catch (error) {
                 res.status(500).json({error: error});
             }
@@ -57,7 +57,7 @@ let updateSatusOrderCombo = async (req, res) => {
             // send mail with defined transport object
             try {
                 let info = await configSendMail.transporter.sendMail(mailOptions);
-                res.json('Email sent!');
+                ;
             } catch (error) {
                 res.status(500).json({error: error});
             }
