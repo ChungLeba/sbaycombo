@@ -91,9 +91,12 @@
               alert('Số điện thoại chưa đăng ký')
             } else if(res.data.noiti == 'Sai mat khau') {
               alert('Vui lòng nhập lại mật khẩu !')
-            }  else if(res.data.noiti == 'Đăng nhập thành công') {
+            }  else if(res.data.noiti == 'Manager login ok') {
               //alert('Chúc mừng bạn đã đăng ký thành công !')
               window.location.href = ("/manager")
+            }  else if(res.data.noiti == 'Employee login ok') {
+              //alert('Chúc mừng bạn đã đăng ký thành công !')
+              window.location.href = ("/employee")
             }
           });
       }

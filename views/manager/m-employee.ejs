@@ -108,8 +108,12 @@
                               <% } %>
                         </td>
                         <td class="whitespace-nowrap px-2 py-4 text-end">
-                          <button onclick="active(this.id)" id="<%= employees[index]._id %>"
-                            class="btn btn-sm btn-outline btn-success mr-2">Duyệt</button>
+                          <% if (employees[index].userActive==false) { %>
+                            <button onclick="active(this.id)" id="<%= employees[index]._id %>"
+                              class="btn btn-sm btn-outline btn-success mr-2">Duyệt</button>
+                           
+                          <% } %>
+                          
                           <button onclick="deleteUser(this.id)" id="<%= employees[index]._id %>"
                             class="btn btn-sm btn-outline btn-danger">Xóa</button>
                         </td>
@@ -131,9 +135,10 @@
         if (confirm("Bạn muốn duyệt nhân viên này?") == true) {
           axios({
             method: 'put',
-            url: 'http://localhost:3000/manager/employee',
+            url: 'http://localhost:3000/manager/quan-ly-nhan-vien',
             responseType: 'json',
             data: {
+              type:"active",
               userID: userId
             }
           })
@@ -148,13 +153,14 @@
 
 
       }
+      
       /*  */
       function deleteUser(userId) {
         //console.log(userId);
         if (confirm("Bạn muốn xóa nhân viên này?") == true) {
           axios({
             method: 'delete',
-            url: 'http://localhost:3000/manager/employee',
+            url: 'http://localhost:3000/manager/quan-ly-nhan-vien',
             responseType: 'json',
             data: {
               userID: userId

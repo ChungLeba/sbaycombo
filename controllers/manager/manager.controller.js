@@ -2,6 +2,7 @@ var userModel = require('../../models/user.model.js');
 var orderComboModel = require('../../models/orderCombo.model.js');
 const crypto = require('crypto');
 var jwt = require('jsonwebtoken');
+const { truncate } = require('fs/promises');
 
 
 // Read employee
@@ -12,7 +13,8 @@ let findAllEmployee = async (req, res) => {
         })
         console.log(findAll.length);
         res.render('./manager/m-employee',{
-            employees: findAll
+            employees: findAll,
+            decoded: req.decoded
         })
 
     } catch (error) {
@@ -80,10 +82,46 @@ let getAllComboCancel = async(req, res) => {
         console.log(error);
     }
 }
+/* Active Employee */
 
+let activeEmployee = async(req, res) => {
+    try {
+        const findAndActive = await userModel.findByIdAndUpdate({
+            _id: req.body.userID
+        },{
+            userActive: true
+        })
+        //console.log(findAndActive);
+        if(findAndActive._id){
+             res.json({
+                noiti:"active ok"
+             });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+let deleteEmployee = async(req, res) => {
+    try {
+        const findAndDelete = await userModel.findByIdAndDelete({
+            _id: req.body.userID
+        })
+        console.log(findAndDelete);
+        if(findAndDelete._id){
+             res.json({
+                noiti:"delete user ok"
+             });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
 module.exports = {
     findAllEmployee: findAllEmployee,
     getAllComboProcessing: getAllComboProcessing,
     getAllComboComplete: getAllComboComplete,
-    getAllComboCancel: getAllComboCancel
+    getAllComboCancel: getAllComboCancel,
+    activeEmployee:activeEmployee,
+    deleteEmployee:deleteEmployee
 };
