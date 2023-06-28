@@ -121,7 +121,7 @@
             //console.log(comboId);
             axios({
               method: 'put',
-              url: 'http://localhost:3000/manager/active-combo/',
+              url: 'https://sbay-salesmanagement.onrender.com/manager/active-combo/',
               data: {
                 id: comboId,
               }
@@ -145,7 +145,7 @@
             //console.log(comboId);
             axios({
               method: 'put',
-              url: 'http://localhost:3000/manager/deactive-combo/',
+              url: 'https://sbay-salesmanagement.onrender.com/manager/deactive-combo/',
               data: {
                 id: comboId,
               }
@@ -169,7 +169,7 @@
             //console.log(comboId);
             axios({
               method: 'post',
-              url: 'http://localhost:3000/manager/delete-combo/'+ comboId,
+              url: 'https://sbay-salesmanagement.onrender.com/manager/delete-combo/'+ comboId,
             })
               .then(function (res) {
                 console.log(res.data);

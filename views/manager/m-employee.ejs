@@ -54,7 +54,7 @@
                     duyệt nhân viên</p>
                   <p class="text-xl font-bold">Bước 1: Copy và gửi link sau</p>
                   <div class="mockup-code my-5 bg-slate-500">
-                    <pre data-prefix="$"><code>http://localhost:3000/dang-ky</code></pre>
+                    <pre data-prefix="$"><code>https://sbay-salesmanagement.onrender.com/dang-ky</code></pre>
                   </div>
                   <p class="text-xl font-bold">Bước 2: Nhấn duyệt</p>
                   <div class="modal-action">
@@ -135,7 +135,7 @@
         if (confirm("Bạn muốn duyệt nhân viên này?") == true) {
           axios({
             method: 'put',
-            url: 'http://localhost:3000/manager/quan-ly-nhan-vien',
+            url: 'https://sbay-salesmanagement.onrender.com/manager/quan-ly-nhan-vien',
             responseType: 'json',
             data: {
               type:"active",
@@ -160,7 +160,7 @@
         if (confirm("Bạn muốn xóa nhân viên này?") == true) {
           axios({
             method: 'delete',
-            url: 'http://localhost:3000/manager/quan-ly-nhan-vien',
+            url: 'https://sbay-salesmanagement.onrender.com/manager/quan-ly-nhan-vien',
             responseType: 'json',
             data: {
               userID: userId
