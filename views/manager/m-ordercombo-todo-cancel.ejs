@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html data-theme="cupcake">
+
+
+<head>
+  <title>
+    SBAY COMBO | Quản lý đơn
+  </title>
+  <meta name="author" content="Chung Le Ba">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.0.20/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+</head>
+
+<body>
+
+
+  <section class="bg-gray-700 dark:bg-gray-900 h-full">
+    <div class="flex flex-col items-center justify-center px-3 py-3 mx-auto lg:py-0">
+      <a href="/" class="mt-5 flex items-start mb-2 text-3xl font-semibold text-white dark:text-white">
+        <img class="w-12 mr-2 rounded-full" src="../../images/sbay-logo.png" alt="logo">
+        Combo
+      </a>
+      <p class="text-xl font-bold text-white">Quản lý đơn</p>
+      <span class="text-sm text-white mb-2">(Manager)</span>
+      <div
+        class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-screen-xl xl:p-0 dark:bg-gray-800 dark:border-gray-700 mb-5">
+        <div class="p-6 space-y-2 md:space-y-3 sm:p-8">
+          <div class="grid lg:grid-cols-8 sm:grid-rows-1">
+            <div class="lg:col-span-5 mb-5">
+              <div class="flex flex-row p-2 bg-slate-100 rounded-md">
+                <div class=" ml-2 mt-1">
+                  <img src="/uploads/<%= order.product_id[0].images[0] %>" class="w-24 rounded-md">
+                </div>
+                <div class="ml-2">
+                  <h1 class="text-xl font-bold">
+                    <%= order.product_id[0].name %>
+                  </h1>
+                  <p>
+                    <%= order.product_id[0].code %> | <%= order.product_id[0].timeCombo %>
+                  </p>
+                  
+                </div>
+                
+
+              </div>
+              <div class="flex flex-row mt-5">
+                <i data-feather="user" class="w-4 h-4 mr-2 mt-1"></i>
+                <h2 class="font-bold"> Thông tin người đặt</h2>
+
+              </div>
+              <div class="space-y-3 md:space-y-3 text-start bg-slate-100 p-5 rounded-lg">
+
+                <div>
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tên
+                    người
+                    đặt:</label>
+                  <p class="text-violet-600 font-bold">
+                    <%= order.customer_id[0].name %>
+                  </p>
+                </div>
+                <div>
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số điện
+                    thoại
+                    người đặt:</label>
+                  <p class="text-violet-600 font-bold">
+                    <%= order.customer_id[0].phone %>
+                  </p>
+                </div>
+                <div>
+                  <div class="grid grid-cols-1">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email:</label>
+                  </div>
+                  <p class="text-violet-600 font-bold">
+                    <%= order.customer_id[0].email %>
+                  </p>
+                </div>
+                <div>
+                  <div class="grid grid-cols-1">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nơi
+                      đi:</label>
+                  </div>
+                  <p class="text-violet-600 font-bold">
+                    <%= order.customer_id[0].departurePlace %>
+                  </p>
+                </div>
+              </div>
+              <div class="flex flex-row mt-5">
+                <i data-feather="file-text" class="w-4 h-4 mr-2 mt-1"></i>
+                <h2 class="font-bold">Thông tin combo yêu cầu</h2>
+              </div>
+              <div class="space-y-3 md:space-y-3 text-start bg-slate-100 p-5 rounded-lg">
+                <div>
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số lượng người
+                    lớn:</label>
+                  <p class="text-blue-600 font-bold">
+                    <%= order.customer_id[0].numberAudult %>
+                  </p>
+                </div>
+                <div>
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số lượng trẻ
+                    em:</label>
+                  <p class="text-blue-600 font-bold">
+                    <%= order.customer_id[0].numberChildren %>
+                  </p>
+                </div>
+                <div>
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ngày
+                    đi:</label>
+                  <p class="text-blue-600 font-bold">
+                    <%= moment(order.customer_id[0].departureDay).format('DD/MM/YYYY') %>
+                  </p>
+                </div>
+
+                <div>
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ngày
+                    về:</label>
+                  <p class="text-blue-600 font-bold">
+                    <%= moment(order.customer_id[0].arrivalDate).format('DD/MM/YYYY') %>
+                  </p>
+                </div>
+                <% if (order.customer_id[0].otherRequirements) { %>
+                  <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Yêu cầu
+                      khác:</label>
+                    <p class="text-blue-600 font-bold">
+                      <%= order.customer_id[0].otherRequirements %>
+                    </p>
+                  </div>
+                  <% } %>
+
+              </div>
+            </div>
+            <div class="lg:col-span-3 lg:ml-5 ">
+              <div class="flex flex-row">
+                <i data-feather="dollar-sign" class="w-4 h-4 mr-2 mt-1"></i>
+                <h2 class="font-bold">Giá tiền:</h2>
+
+              </div>
+              <div class="overflow-x-auto">
+                <table class="table bg-slate-100">
+                  <!-- head -->
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Hành khách</th>
+                      <th class="text-end">Đơn giá</th>
+                      <th class="text-end">Số lượng</th>
+                      <th class="text-end">Thành tiền</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if (order.customer_id[0].numberAudult) { %>
+                      <tr>
+                        <th>1</th>
+                        <td>Người lớn</td>
+                        <td class="text-end"><%= formatPrice(order.product_id[0].price) %></td>
+                        <td class="text-end"><%= order.customer_id[0].numberAudult %></td>
+                        <td class="text-end font-bold"><%= formatPrice(order.customer_id[0].numberAudult * order.product_id[0].price) %></td>
+                      </tr>
+                     <% } %>
+                      <% if (order.customer_id[0].numberChildren) { %>
+                      <tr>
+                        <th>2</th>
+                        <td>Trẻ em</td>
+                        <td class="text-end"><%= formatPrice(order.product_id[0].priceChild) %></td>
+                        <td class="text-end"><%= order.customer_id[0].numberChildren %></td>
+                        <td class="text-end font-bold"><%= formatPrice(order.customer_id[0].numberChildren * order.product_id[0].priceChild) %></td>
+                      </tr>
+                    <% } %>
+                    <tr>
+                      <th></th>
+                      <td></td>
+                      <td class="text-end"></td>
+                      <td class="text-end">Tổng:</td>
+                      <td class="text-end font-bold"><%= formatPrice(order.customer_id[0].numberAudult * order.product_id[0].price + order.customer_id[0].numberChildren * order.product_id[0].priceChild) %>đ</td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+              <!-- xu ly -->
+              <div class="flex flex-row mt-5">
+                <h2 class="font-bold">Nhân viên xử lý</h2>
+
+              </div>
+              <div class="flex items-center mt-5">
+                <div class="bg-orange-700 text-white rounded-full p-2 mr-2 flex flex-row"><i data-feather="award"
+                    class="w-4 h-4 mt-1"></i>1</div>
+                <div class="flex flex-col">
+                  <strong class="text-xl text-orange-600"><%= order.user_id[0].userName %></strong>
+                  <!-- <span class="text-sm">Nhân viên kinh doanh</span> -->
+                </div>
+              </div>
+         
+              
+
+              <!-- Step -->
+              <div class="flex flex-row mt-5">
+                <i data-feather="file-text" class="w-4 h-4 mr-2 mt-1"></i>
+                <h2 class="font-bold">Tiến trình xử lý</h2>
+              </div>
+              <ul class="steps w-full pl-5 bg-slate-100 rounded-md steps-vertical">
+                <li class="step step-primary text-sm">
+                  Chờ xử lý (đặt lúc: <%= order.timeCreate.toLocaleString() %>)
+                </li>
+                <li class="step step-primary text-sm">Đang xử lý (<%= order.timeCreateEmployee.toLocaleString() %>)</li>
+                <li class="step step-primary text-sm">Hoàn thành </li>
+                <li class="step step-primary text-sm">Hủy (<%= order.timeUpdateEmployee.toLocaleString() %>)</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="flex justify-center">
+            <a href="/employee" class="text-center text-red-700 mb-2 justify-center">Quay lại</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <script>
+    function confirm() {
+      const value = document.getElementById('todostatus').value;
+      const user_id = '6493ea60ed7bdf2f37c15dc7';
+      const e1 = document.getElementById("btnConfirm");
+      const orderId = e1.getAttribute("orderId");
+      axios({
+        method: 'post',
+        url: '/api/employee/updateStatus/' + orderId,
+        data: {
+          status: value,
+          user_id: user_id
+        }
+      })
+        .then(function (res) {
+          console.log(res.data);
+          // if (res.data.noiti == 1) {
+          //   alert('Thay đổi trạng thái thành công')
+          //   window.location.reload()
+          // } else {
+          //   //window.location.href = "/"
+          // }
+        });
+    }
+
+  </script>
+
+</body>
+
+</html>

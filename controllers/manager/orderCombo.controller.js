@@ -1,5 +1,6 @@
 // var customerModel = require('../models/customer.model');
 var orderComboModel = require('../../models/orderCombo.model');
+var userModel = require('../../models/user.model');
 
 // Get All Customer
 let getAllCustomer = async(req, res) => {
@@ -12,10 +13,19 @@ let getAllCustomer = async(req, res) => {
             return Items;
         }
 
+        const countItemWait = await orderComboModel.count({status: 'wait'})
+        const countItemProcessing = await orderComboModel.count({status: 'processing'})
+        const countItemComplete = await orderComboModel.count({status: 'complete'})
+        const countItemCancel = await orderComboModel.count({status: 'cancel'})
+
         getItems().then(function(FoundItems) {
             res.render('./manager/m-combo-wait', {
                 data: FoundItems,
-                decoded: req.decoded
+                decoded: req.decoded,
+                countWait: countItemWait,
+                countProcessing: countItemProcessing,
+                countComplete: countItemComplete,
+                countCancel: countItemCancel
             });
         });
     } catch (error) {
@@ -36,7 +46,7 @@ let oneOrderComboWait = async(req, res) => {
 
         getItems().then(function(FoundItems) {
             console.log(FoundItems);
-            res.render('./employee/e-ordercombo-todo', {
+            res.render('./manager/m-ordercombo-todo', {
                 order: FoundItems,
                 decoded: req.decoded
             });
@@ -53,15 +63,19 @@ let oneOrderComboProcessing = async(req, res) => {
             const Items = await orderComboModel.findById(req.params.id)
                         .populate('product_id') // populate tại trường nào
                         .populate('customer_id')
+                        .populate('user_id')
                         .sort({'timeCreate': 'desc'}); // sắp xếp theo thứ tự mới nhất -> cũ nhất
             return Items;
         }
 
+        const users = await userModel.find({userActive: 'true'}).sort({'timeCreate': 'desc'});
+
         getItems().then(function(FoundItems) {
             console.log(FoundItems);
-            res.render('./employee/e-ordercombo-todo-processing', {
+            res.render('./manager/m-ordercombo-todo-processing', {
                 order: FoundItems,
-                decoded: req.decoded
+                decoded: req.decoded,
+                users: users
             });
         });
     } catch (error) {
@@ -76,15 +90,19 @@ let oneOrderComboComplete = async(req, res) => {
             const Items = await orderComboModel.findById(req.params.id)
                         .populate('product_id') // populate tại trường nào
                         .populate('customer_id')
+                        .populate('user_id')
                         .sort({'timeCreate': 'desc'}); // sắp xếp theo thứ tự mới nhất -> cũ nhất
             return Items;
         }
 
+        const users = await userModel.find({userActive: 'true'}).sort({'timeCreate': 'desc'});
+
         getItems().then(function(FoundItems) {
             console.log(FoundItems);
-            res.render('./employee/e-ordercombo-todo-complete', {
+            res.render('./manager/m-ordercombo-todo-complete', {
                 order: FoundItems,
-                decoded: req.decoded
+                decoded: req.decoded,
+                users: users
             });
         });
     } catch (error) {
@@ -99,13 +117,14 @@ let oneOrderComboCancel = async(req, res) => {
             const Items = await orderComboModel.findById(req.params.id)
                         .populate('product_id') // populate tại trường nào
                         .populate('customer_id')
+                        .populate('user_id')
                         .sort({'timeCreate': 'desc'}); // sắp xếp theo thứ tự mới nhất -> cũ nhất
             return Items;
         }
 
         getItems().then(function(FoundItems) {
             console.log(FoundItems);
-            res.render('./employee/e-ordercombo-todo-cancel', {
+            res.render('./manager/m-ordercombo-todo-cancel', {
                 order: FoundItems,
                 decoded: req.decoded
             });

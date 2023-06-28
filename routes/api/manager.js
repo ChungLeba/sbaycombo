@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const comboController = require('../../controllers/api/combo.controller');
 const orderComboController = require('../../controllers/api/orderCombo.controller');
+const managerController = require('../../controllers/api/manager.controller');
 
 /* GET API products listing. */
 router.get('/', comboController.getActiveCombo);
@@ -17,5 +18,7 @@ router.get('/show-combo/:id', comboController.showCombo);
 router.get('/remaining-combo/:id', comboController.remainingCombo);
 /* POST API update status combo */
 router.post('/updateStatus/:id', orderComboController.updateSatusOrderCombo);
+/* POST API update user combo */
+router.post('/updateUser/:id', managerController.updateUserIdCombo);
 
 module.exports = router;

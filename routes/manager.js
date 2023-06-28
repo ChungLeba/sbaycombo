@@ -77,4 +77,13 @@ router.put('/active-combo', checkLoginManager, comboController.activeCombo);
 /* deactive combo */
 router.put('/deactive-combo', checkLoginManager, comboController.deactiveCombo);
 
+/* GET 1 orderCombo wait */
+router.get('/orderCombo-wait/:id', checkLoginManager, orderComboController.oneOrderComboWait);
+/* GET 1 orderCombo processing */
+router.get('/orderCombo-processing/:id', checkLoginManager, orderComboController.oneOrderComboProcessing);
+// /* GET 1 orderCombo complete */
+router.get('/orderCombo-complete/:id', checkLoginManager, orderComboController.oneOrderComboComplete);
+// /* GET 1 orderCombo cancel */
+router.get('/orderCombo-cancel/:id', checkLoginManager, orderComboController.oneOrderComboCancel);
+
 module.exports = router;

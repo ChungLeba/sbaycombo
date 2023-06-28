@@ -34,11 +34,20 @@ let getAllComboProcessing = async(req, res) => {
             return Items;
         }
 
+        const countItemWait = await orderComboModel.count({status: 'wait'})
+        const countItemProcessing = await orderComboModel.count({status: 'processing'})
+        const countItemComplete = await orderComboModel.count({status: 'complete'})
+        const countItemCancel = await orderComboModel.count({status: 'cancel'})
+
         getItems().then(function(FoundItems) {
             // res.send({data: FoundItems});
             res.render('./manager/m-combo-processing', {
                 data: FoundItems,
-                decoded: req.decoded
+                decoded: req.decoded,
+                countWait: countItemWait,
+                countProcessing: countItemProcessing,
+                countComplete: countItemComplete,
+                countCancel: countItemCancel
             });
         });
     } catch (error) {
@@ -58,10 +67,19 @@ let getAllComboComplete = async(req, res) => {
             return Items;
         }
 
+        const countItemWait = await orderComboModel.count({status: 'wait'})
+        const countItemProcessing = await orderComboModel.count({status: 'processing'})
+        const countItemComplete = await orderComboModel.count({status: 'complete'})
+        const countItemCancel = await orderComboModel.count({status: 'cancel'})
+
         getItems().then(function(FoundItems) {
             res.render('./manager/m-combo-complete', {
                 data: FoundItems,
-                decoded: req.decoded
+                decoded: req.decoded,
+                countWait: countItemWait,
+                countProcessing: countItemProcessing,
+                countComplete: countItemComplete,
+                countCancel: countItemCancel
             });
         });
     } catch (error) {
@@ -81,10 +99,19 @@ let getAllComboCancel = async(req, res) => {
             return Items;
         }
 
+        const countItemWait = await orderComboModel.count({status: 'wait'})
+        const countItemProcessing = await orderComboModel.count({status: 'processing'})
+        const countItemComplete = await orderComboModel.count({status: 'complete'})
+        const countItemCancel = await orderComboModel.count({status: 'cancel'})
+
         getItems().then(function(FoundItems) {
             res.render('./manager/m-combo-cancel', {
                 data: FoundItems,
-                decoded: req.decoded
+                decoded: req.decoded,
+                countWait: countItemWait,
+                countProcessing: countItemProcessing,
+                countComplete: countItemComplete,
+                countCancel: countItemCancel
             });
         });
     } catch (error) {
