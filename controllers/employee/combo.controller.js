@@ -13,6 +13,9 @@ let getAllCombo = async(req, res) => {
         const countItemProcessing = await orderComboModel.count({status: 'processing', user_id: req.decoded.userID})
         const countItemComplete = await orderComboModel.count({status: 'complete', user_id: req.decoded.userID})
         const countItemCancel = await orderComboModel.count({status: 'cancel', user_id: req.decoded.userID})
+        const comboActive = await comboModel.find({
+            active: true })
+
 
         getItems().then(function(FoundItems){
             //console.log(FoundItems);
@@ -23,13 +26,31 @@ let getAllCombo = async(req, res) => {
                 countProcessing: countItemProcessing,
                 countComplete: countItemComplete,
                 countCancel: countItemCancel,
+                comboActive:comboActive
             })
         });
     } catch (error) {
         console.log(error);
     }
 };
-
+// Read to view product
+let readToViewCombo = async (req, res) => {
+    try {
+        comboModel.findById(req.params.id)
+            .then(FoundItem => {
+                res.render('./employee/e-read-combo', {
+                    data: FoundItem,
+                    decoded: req.decoded
+                });
+            })
+            .catch(err => {
+                console.log("error");
+            });
+    } catch (error) {
+        console.log(error);
+    }
+}
 module.exports = {
     getAllCombo: getAllCombo,
+    readToViewCombo: readToViewCombo,
 };

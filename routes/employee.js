@@ -46,4 +46,6 @@ router.get('/orderCombo-cancel/:id', checkLoginEmployee, orderComboController.on
 // router.get('/quan-ly-combo-dang-cho', function (req, res, next) {
 //   res.render('./employee/e-ordercombo-todo')
 // });
+/* Read 1 combo */
+router.get('/combo/:id', comboController.readToViewCombo);
 module.exports = router;

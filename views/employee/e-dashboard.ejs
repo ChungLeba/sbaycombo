@@ -17,22 +17,27 @@
 
 <body>
   <%- include('e-com-topbar.ejs'); -%>
-    <h1 class="text-2xl mt-5 text-center text-red-600 font-bold">Tổng quan</h1>
 
 
     <div class="mx-auto max-w-7xl px-2 lg:px-8 mt-5">
       <div class="px-4 mx-auto w-full">
+        <h1 class="text-2xl mt-5 text-start text-red-600 font-bold">Tổng quan</h1>
+        <p class="text-sm mb-5">
+          30 ngày gần đây
+        </p>
         <div>
           <div class="flex flex-wrap animate__animated animate__pulse">
 
-            
+
             <a href="/employee/quan-ly-combo" class="w-full lg:w-6/12 xl:w-3/12 px-4">
               <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                 <div class="flex-auto p-4">
                   <div class="flex flex-wrap">
                     <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
                       <h5 class="text-blueGray-400 uppercase font-bold text-xs">Combo chờ xử lý</h5><span
-                        class="font-semibold text-xl text-red-700"><%= countWait %></span>
+                        class="font-semibold text-xl text-red-700">
+                        <%= countWait %>
+                      </span>
                     </div>
                     <div class="relative w-auto pl-4 flex-initial">
                       <div
@@ -50,7 +55,7 @@
                   <div class="flex flex-wrap">
                     <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
                       <h5 class="text-blueGray-400 uppercase font-bold text-xs">Hot deals chờ xử lý</h5><span
-                        class="font-semibold text-xl text-orange-700">23</span>
+                        class="font-semibold text-xl text-orange-700">##</span>
                     </div>
                     <div class="relative w-auto pl-4 flex-initial">
                       <div
@@ -102,42 +107,70 @@
 
         </div>
       </div>
-      <p class="text-start ml-5 my-3">Các bombo đang áp dụng</p>
+      <p class="text-start my-3 font-bold text-red-600">Các bombo đang áp dụng
       <div class=" px-2 lg:overflow-visible lg:px-0">
-        <div class="mx-auto max-w-7xl px-2 lg:px-8">
+        <div class="mx-auto max-w-7xl">
           <% var regex=/(<([^>]+)>)/ig %>
-          <div class="grid grid-row-4 gap-4">
-            <% for( let index=0; index < data.length; index++ ) { %>
-              <div class="grid lg:grid-cols-12 sm:grid-row-4 p-5 bg-white rounded-lg shadow-xl">
-                <div class="lg:col-span-2 mt-3">
-                  <img src="/uploads/<%= data[index].images[0] %>" class="rounded-lg mx-auto w-full" style="height: 100%;" alt="">
-                </div>
-                <div class="lg:col-span-10 p-5">
-                  <div class="grid grid-cols-2">
-                    <p class="text-center flex flex-row"><i data-feather="map-pin" class="mr-2 w-4"></i><%= data[index].location %></p>
+            <div class="grid grid-row-4 gap-4">
+              <% for( let index=0; index < comboActive.length; index++ ) { %>
+                <div class="grid lg:grid-cols-12 sm:grid-row-4 bg-white rounded-lg shadow-xl">
+                  <div class="lg:col-span-4 mt-3 p-2">
+                    <img src="/uploads/<%= comboActive[index].images[0] %>" class="rounded-lg mx-auto w-full" alt="">
 
-                    <a href="#" class="rounded-lg text-red-700 text-xl text-end flex flex-row justify-end"><i
-                        data-feather="eye" class="mr-2 mt-1"></i>Xem combo</a>
+                    <div id="imgPreview" class="grid grid-cols-6 gap-2 p-2 align-middle">
+                      <% for( let t=1; t < comboActive[index].images.length; t++ ) { %>
+                        <img class="w-20 rounded-md self-center ..." src="/uploads/<%= comboActive[index].images[t] %>"
+                          alt="">
+                        <% } %>
+                    </div>
                   </div>
-                  <h3 class="text-2xl m2-3 font-bold"><%= data[index].name %></h3>
-                  <p class="mb-2"><%- data[index].description.slice(0,300).replace(regex, "" ) %></p>
-                  <p class="flex flex-row mb-2"><i data-feather="code" class="mr-2 w-4"></i>Mã Combo: <%= data[index].code %></p>
-                  <p class="flex flex-row mb-2"><i data-feather="clock" class="mr-2 w-4"></i>Thời gian: <%= data[index].timeCombo %></p>
-                  <p class="flex flex-row mb-2"><i data-feather="shopping-bag" class="mr-2 w-4"></i>150 đã đặt</p>
-                  <p class="flex flex-row mb-2"><i data-feather="dollar-sign" class="mr-2 w-4"></i><%= formatPrice(data[index].price) %> đ/khách</p>
+                  <div class="lg:col-span-8 py-5 pl-2">
+                    <div class="grid grid-cols-2">
+                      <p class="text-center flex flex-row text-green-600"><i data-feather="map-pin"
+                          class="mr-2 w-4"></i>
+                        <%= comboActive[index].location %>
+                      </p>
+
+                    </div>
+                    <a href="/employee/combo/<%= comboActive[index].id %>">
+                      <h3 class="text-2xl my-2 font-bold hover:text-red-600">
+                        <%= comboActive[index].name %>
+                      </h3>
+                    </a>
+
+                    <p class="flex flex-row mb-2 italic"><%-
+                        comboActive[index].description.slice(0,300).replace(regex, "" ) %>
+                    </p>
+                    <div class="grid lg:grid-cols-2 sm:grid-cols-1  mt-2">
+                      <div>
+                        <p class="flex flex-row mb-2 font-bold"><i data-feather="code" class="mr-2 w-4"></i>Mã Combo:
+                          <%= comboActive[index].code %>
+                        </p>
+                        <p class="flex flex-row mb-2 font-bold"><i data-feather="clock" class="mr-2 w-4"></i>Thời gian:
+                          <%= comboActive[index].timeCombo %>
+                        </p>
+                      </div>
+                      <div>
+                        <p class="flex flex-row mb-2 font-bold"><i data-feather="shopping-bag" class="mr-2 w-4"></i>150
+                          đã
+                          đặt</p>
+                        <p class="flex flex-row mb-2 font-bold"><i data-feather="dollar-sign" class="mr-2 w-4"></i>
+                          <%= formatPrice(comboActive[index].price) %> đ/khách
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
+                <% } %>
 
-              </div>
-              <% } %>
-
-
-          </div>
+            </div>
         </div>
       </div>
     </div>
-      <script>
-        feather.replace()
-      </script>
+    <script>
+      feather.replace()
+    </script>
 </body>
 
 </html>

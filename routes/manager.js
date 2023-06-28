@@ -71,7 +71,7 @@ router.post('/update-combo/:id', checkLoginManager, upload.array('images', 20), 
 /* DELETE detele combo */
 router.post('/delete-combo/:id', checkLoginManager, comboController.deleteCombo);
 /* Read 1 combo */
-router.get('/combo/:id', checkLoginManager, comboController.readToViewCombo);
+router.get('/combo/:id', comboController.readToViewCombo);
 /* Active combo */
 router.put('/active-combo', checkLoginManager, comboController.activeCombo);
 /* deactive combo */
